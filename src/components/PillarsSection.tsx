@@ -8,7 +8,7 @@ interface PillarsSectionProps {
 export const PillarsSection: React.FC<PillarsSectionProps> = ({ currentLang }) => {
   const pillars = [
     {
-      title: currentLang === 'es' ? 'Flota 100% Automática 4x4' : '100% Automatic 4x4 Fleet',
+      title: currentLang === 'es' ? 'Flota 100% Automática' : '100% Automatic Fleet',
       tag: 'CAN-AM 570CC • HONDA 420CC',
       desc:
         currentLang === 'es'

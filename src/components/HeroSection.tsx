@@ -100,7 +100,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   : 'FEEL THE AMAZON ON'}
               </span>
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-flame-400 via-flame-500 to-amber-500 animate-gradient-text drop-shadow-[0_4px_24px_rgba(255,96,54,0.35)]">
-                {currentLang === 'es' ? 'CUATRO RUEDAS 4X4' : 'FOUR WHEELS 4X4'}
+                {currentLang === 'es' ? 'CUATRO RUEDAS' : 'FOUR WHEELS'}
               </span>
             </>
           ) : (
@@ -121,11 +121,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <p className="mt-6 text-base sm:text-xl text-ivory-300 max-w-3xl font-normal leading-relaxed drop-shadow">
           {isAtv
             ? currentLang === 'es'
-              ? 'Expediciones todoterreno guiadas hacia cascadas ocultas, lagunas esmeralda y cruces de ríos en Tena, Napo. Máquinas automáticas CAN-AM y Honda 4x4 con guías certificados y senderos de selva virgen.'
-              : 'Guided off-road quad expeditions through hidden waterfalls, emerald river basins, and primary rainforest trails in Tena, Napo. Automatic CAN-AM & Honda 4x4 fleet with wilderness-certified local pilots.'
+              ? 'Expediciones todoterreno guiadas hacia cascadas ocultas, lagunas esmeralda y cruces de ríos en Tena, Napo. Máquinas automáticas CAN-AM y Honda con guías certificados y senderos de selva virgen.'
+              : 'Guided off-road quad expeditions through hidden waterfalls, emerald river basins, and primary rainforest trails in Tena, Napo. Automatic CAN-AM & Honda fleet with wilderness-certified local pilots.'
             : currentLang === 'es'
-            ? 'Descubre paquetes todo incluido de 2, 3 y 4 días (selva profunda, cascadas sagradas, cavernas de Jumandy y cuadrones 4x4) y tours diarios de adrenalina pura con guías nativos.'
-            : 'Discover all-inclusive 2, 3, and 4-day packages (deep rainforest, sacred waterfalls, Jumandy caves & 4x4 quads) and pure adrenaline day tours with local native guides.'}
+            ? 'Descubre paquetes todo incluido de 2, 3 y 4 días (selva profunda, cascadas sagradas, cavernas de Jumandy y cuadrones) y tours diarios de adrenalina pura con guías nativos.'
+            : 'Discover all-inclusive 2, 3, and 4-day packages (deep rainforest, sacred waterfalls, Jumandy caves & quads) and pure adrenaline day tours with local native guides.'}
         </p>
 
         {/* Primary Action Buttons */}

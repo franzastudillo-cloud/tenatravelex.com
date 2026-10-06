@@ -1,6 +1,6 @@
 # 🌿 Tena Travel Expeditions — Portal Oficial & Sistema de Gestión
 
-Aplicación web interactiva para **Tena Travel Expeditions** (Tena, Napo, Ecuador), especializada en paquetes turísticos multidía todo incluido, expediciones de ecoturismo, rafting en el río Jatunyacu y circuitos todoterreno en cuatrimotos 4x4 automáticas.
+Aplicación web interactiva para **Tena Travel Expeditions** (Tena, Napo, Ecuador), especializada en paquetes turísticos multidía todo incluido, expediciones de ecoturismo, rafting en el río Jatunyacu y circuitos todoterreno en cuatrimotos automáticas.
 
 Incluye panel de control para administradores protegido con contraseña y sincronización con bases de datos en la nube (Cloudflare D1 / SQLite Engine).
 
@@ -67,7 +67,7 @@ npm run preview
 - **Contraseña predeterminada:** `tena2025`
 - **Funcionalidades:**
   - Editar, agregar y eliminar **Paquetes Multidía Todo Incluido**.
-  - Editar, agregar y eliminar **Circuitos en Cuatrimoto 4x4** (tarifas individual y biplaza, especificaciones técnicas).
+  - Editar, agregar y eliminar **Circuitos en Cuatrimoto** (tarifas individual y biplaza, especificaciones técnicas).
   - Pestaña **Cloudflare D1**: generador de SQL en tiempo real con botón de copiado de un clic y configuración de conexión API en red.
   - Pestaña **Seguridad**: cambio de contraseña de administrador.
 

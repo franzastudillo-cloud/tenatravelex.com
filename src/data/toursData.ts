@@ -96,7 +96,7 @@ export const MULTI_DAY_PACKAGES: MultiDayPackage[] = [
     difficultyEn: 'Families & Couples',
     departure: 'Salidas diarias',
     departureEn: 'Daily departures',
-    desc: 'La experiencia insignia de Napo. Combina confort en eco-lodge, cavernas místicas de estalagmitas y ruta en cuadrón 4x4 por pozas vírgenes de selva.',
+    desc: 'La experiencia insignia de Napo. Combina confort en eco-lodge, cavernas místicas de estalagmitas y ruta en cuadrón por pozas vírgenes de selva.',
     descEn: "Napo's flagship experience. Combines private eco-lodge comfort, mystical stalagmite caves, and an ATV quad river tour to pristine jungle pools.",
     priceFrom: 185,
     discountBadge: '-15% para grupos (4+)',
@@ -104,7 +104,7 @@ export const MULTI_DAY_PACKAGES: MultiDayPackage[] = [
     image: 'https://lh3.googleusercontent.com/aida/AEtjO1Xi7PswMpkHvM2IXojOzlX49beS1413C_rNmqZoWFZmSctMWnlq2AP3MxTtgQE9cHlgVFfxZsPfqD2-uZ4MO6DHt1UEgLOdyaGnGgaVPUuULgCT8ryvq5lFX_nmX4rI9WkUMPxFGRX9x3XCuhu69IWuyFLbSbDkg5xK_28UG1aeSs5XeePYIj5HNAqgrw8eRcrunLuuWxIAMJ1EqFOJ_SffFpo4G87paTKBPg8oQ1j_r-7xZatMBhQ6yH8',
     includes: [
       '2 Noches en eco-lodge amazónico privado con piscina y hamacas',
-      'Tour en Cuadrones 4x4 a Cascada Escondida y cañón de agua turquesa',
+      'Tour en Cuadrones a Cascada Escondida y cañón de agua turquesa',
       'Navegación en canoa a motor por el majestuoso río Napo',
       'Expedición con linterna frontal a Cavernas de Jumandy',
       'Alimentación típica completa (desayunos, almuerzos campestres, cenas)',
@@ -112,7 +112,7 @@ export const MULTI_DAY_PACKAGES: MultiDayPackage[] = [
     ],
     includesEn: [
       '2 Nights at private rainforest eco-lodge with swimming pool & hammocks',
-      '4x4 Quad tour to Hidden Waterfall and turquoise water canyon',
+      'Quad tour to Hidden Waterfall and turquoise water canyon',
       'Motorized wooden canoe trip down the majestic Napo River',
       'Spelunking expedition with headlamps in Jumandy Caves',
       'Full typical meals (daily breakfasts, river lunches, gourmet dinners)',
@@ -127,9 +127,9 @@ export const MULTI_DAY_PACKAGES: MultiDayPackage[] = [
       },
       {
         day: 'Día 2',
-        title: 'Expedición en Cuadrones 4x4 a Cascada Escondida & Cañón',
-        desc: 'Desayuno tropical con frutas frescas y café de Napo. Inducción práctica en pista cerrada y entrega de equipamiento DOT. Salida en caravana 4x4 cruzando senderos de selva primaria y 3 vados de río hasta la Cascada Escondida. Tiempo libre para nadar en la laguna esmeralda y snack campestre.',
-        activities: ['Pista de prueba y calentamiento 4x4', 'Ruta en cuadrón entre ríos y selva', 'Baño natural en cascada virgen', 'Regreso a lodge para cena gourmet']
+        title: 'Expedición en Cuadrones a Cascada Escondida & Cañón',
+        desc: 'Desayuno tropical con frutas frescas y café de Napo. Inducción práctica en pista cerrada y entrega de equipamiento DOT. Salida en caravana cruzando senderos de selva primaria y 3 vados de río hasta la Cascada Escondida. Tiempo libre para nadar en la laguna esmeralda y snack campestre.',
+        activities: ['Pista de prueba y calentamiento', 'Ruta en cuadrón entre ríos y selva', 'Baño natural en cascada virgen', 'Regreso a lodge para cena gourmet']
       },
       {
         day: 'Día 3',
@@ -152,20 +152,20 @@ export const MULTI_DAY_PACKAGES: MultiDayPackage[] = [
     departure: 'Fin de semana & diario',
     departureEn: 'Weekends & Daily',
     desc: 'Para buscadores de emoción fuerte. Conducción extrema en lodo amazónico, rápidos clase III del río Jatunyacu y noche de asado bajo las estrellas.',
-    descEn: 'For thrill-seekers. Extreme 4x4 throttle ride across deep Amazonian mud tracks, world-class Jatunyacu river rapids, and evening BBQ by the campfire.',
+    descEn: 'For thrill-seekers. Extreme throttle ride across deep Amazonian mud tracks, world-class Jatunyacu river rapids, and evening BBQ by the campfire.',
     priceFrom: 140,
     categoryBadge: 'Incluye Rafting + Quad',
     categoryBadgeEn: 'Includes Rafting + Quad',
     image: 'https://lh3.googleusercontent.com/aida/AEtjO1U84MIsR6LOHxnBMyMvb96kVFQBfx_CJucc9z9HHL7AYyGAhmAzGXgCxfoxwQQhFXW3ZtcgxCI0cl7UrxUhVa3Oyl1YQxiJZUkIsA3Hfyds131DjsPtXWq3j6dtZ4qUAAxg-1XFeaKFjRVGatiCIhlG49qJrJMqMnRY3vxid-UW8geZrHRq8YYLRK7WunqZyTdOR2xGii-Itv7lGvoH_-kww5PgC1sS0JLxyAwPVIM74Htuw-c-k53nrw',
     includes: [
-      'Ruta extrema en cuadrón 4x4 por barro arcilloso y selva alta (4 horas)',
+      'Ruta extrema en cuadrón por barro arcilloso y selva alta (4 horas)',
       'Rafting de 25 km en Río Jatunyacu (Rápidos Clase III mundial)',
       'Noche en cabaña rústica de selva o glamping con vista al río',
       'Asado amazónico tradicional nocturno con fogata y bebidas locales',
       'Casco integral FOX, chaleco salvavidas certificado y fotos GoPro'
     ],
     includesEn: [
-      'Extreme 4x4 quad route through mud and deep jungle trails (4 hours)',
+      'Extreme quad route through mud and deep jungle trails (4 hours)',
       '25 km White Water Rafting on Jatunyacu River (Class III world-class)',
       '1 Night at rustic jungle cabin or safari glamping with river view',
       'Traditional Amazonian BBQ dinner with campfire & local drinks',
@@ -208,14 +208,14 @@ export const MULTI_DAY_PACKAGES: MultiDayPackage[] = [
       '3 Noches en lodge ecológico ribereño frente al río Napo',
       'Inmersión con comunidad Kichwa y taller de chicha viva',
       'Senderismo interpretativo a ceibos gigantes milenarios de 500 años',
-      'Cuadrones 4x4 hacia miradores panorámicos al ocaso dorado',
+      'Cuadrones hacia miradores panorámicos al ocaso dorado',
       'Cata artesanal y elaboración guiada de chocolate de fino aroma'
     ],
     includesEn: [
       '3 Nights at riverside eco-lodge overlooking the Napo River',
       'Kichwa community immersion and artisan chicha workshop',
       'Interpretative trek to giant millennial 500-year-old Kapok trees',
-      '4x4 ATV ride up to panoramic golden hour sunset viewpoints',
+      'ATV ride up to panoramic golden hour sunset viewpoints',
       'Handcrafted fine aroma chocolate roasting and tasting session'
     ],
     itinerary: [
@@ -233,9 +233,9 @@ export const MULTI_DAY_PACKAGES: MultiDayPackage[] = [
       },
       {
         day: 'Día 3',
-        title: 'Expedición en Cuadrones 4x4 a Miradores de la Hora Dorada',
-        desc: 'Por la tarde montamos en los cuadrones 4x4 automáticos para ascender colinas selváticas hacia el mirador más alto de la provincia. Vista panorámica 360° de los meandros del Napo bajo los colores dorados del atardecer. Retorno nocturno con barras LED.',
-        activities: ['Ruta escénica en cuadrón 4x4', 'Parada fotográfica en mirador panorámico', 'Brindis al atardecer sobre el río Napo', 'Regreso nocturno en caravana iluminada']
+        title: 'Expedición en Cuadrones a Miradores de la Hora Dorada',
+        desc: 'Por la tarde montamos en los cuadrones automáticos para ascender colinas selváticas hacia el mirador más alto de la provincia. Vista panorámica 360° de los meandros del Napo bajo los colores dorados del atardecer. Retorno nocturno con barras LED.',
+        activities: ['Ruta escénica en cuadrón', 'Parada fotográfica en mirador panorámico', 'Brindis al atardecer sobre el río Napo', 'Regreso nocturno en caravana iluminada']
       },
       {
         day: 'Día 4',
@@ -292,8 +292,8 @@ export const DAILY_QUAD_TOURS: DailyQuadTour[] = [
     id: 'selva-virgen-mud',
     circuitNum: 'CIRCUITO 02 • MUD EXPEDITION',
     category: 'extrema',
-    categoryLabel: 'Barro 4x4 Extremo',
-    categoryLabelEn: 'Extreme 4x4 Mud',
+    categoryLabel: 'Barro Extremo',
+    categoryLabelEn: 'Extreme Mud',
     badge: 'ADRENALINA PURA · MUCHO LODO',
     badgeEn: 'PURE ADRENALINE · HEAVY MUD',
     title: 'Selva Virgen & Deep Mud Trail',

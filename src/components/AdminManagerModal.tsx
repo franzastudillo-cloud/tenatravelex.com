@@ -170,13 +170,13 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
       image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80',
       includes: [
         'Hospedaje en eco-lodge seleccionado',
-        'Tour en Cuadrones 4x4 por selva y ríos',
+        'Tour en Cuadrones por selva y ríos',
         'Alimentación completa tradicional',
         'Guía nativo certificado bilingüe',
       ],
       includesEn: [
         'Lodging at selected eco-lodge',
-        '4x4 Quad tour across jungle and rivers',
+        'Quad tour across jungle and rivers',
         'Full typical meals included',
         'Wilderness-certified bilingual guide',
       ],
@@ -189,9 +189,9 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
         },
         {
           day: 'Día 2',
-          title: 'Ruta 4x4 a Cascada Escondida',
+          title: 'Ruta a Cascada Escondida',
           desc: 'Expedición en cuadrón por senderos y baño en pozas de agua esmeralda.',
-          activities: ['Pista de práctica', 'Caravana 4x4', 'Cascada natural'],
+          activities: ['Pista de práctica', 'Caravana en cuadrón', 'Cascada natural'],
         },
       ],
     });
@@ -207,8 +207,8 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
       category: 'popular',
       categoryLabel: 'Ruta Panorámica',
       categoryLabelEn: 'Scenic Route',
-      badge: 'NUEVO CIRCUITO · 4X4',
-      badgeEn: 'NEW CIRCUIT · 4X4',
+      badge: 'NUEVO CIRCUITO',
+      badgeEn: 'NEW CIRCUIT',
       title: 'Nuevo Circuito en Cuadrón',
       titleEn: 'New ATV Quad Circuit',
       duration: '2.5 Horas',
@@ -225,7 +225,7 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
         terrain: 'GRAVA / TIERRA',
         power: '420 CC',
         mudLevel: 'MODERADO',
-        traction: '4X4 SELECTIVO',
+        traction: 'SELECTIVA',
         elevation: '+450 M',
         schedule: '09:00 AM & 14:00 PM',
       },
@@ -321,7 +321,7 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
             }`}
           >
             <Zap className="w-4 h-4" />
-            <span>Circuitos Cuadrones 4x4 ({tours.length})</span>
+            <span>Circuitos en Cuadrones ({tours.length})</span>
           </button>
 
           <button
@@ -681,7 +681,7 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
             </div>
           )}
 
-          {/* TAB 2: CIRCUITOS CUADRONES 4X4 */}
+          {/* TAB 2: CIRCUITOS EN CUADRÓN */}
           {activeTab === 'atv' && (
             <div>
               {editingTour ? (
@@ -740,7 +740,7 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
                         className="w-full bg-carbon-900 border border-jungle-700 focus:border-flame-500 rounded-xl px-3 py-2 text-sm text-ivory-100"
                       >
                         <option value="popular">Cascadas & Baño Natural</option>
-                        <option value="extrema">Barro 4x4 Extremo</option>
+                        <option value="extrema">Barro Extremo</option>
                         <option value="scenic">Miradores & Ocaso</option>
                       </select>
                     </div>

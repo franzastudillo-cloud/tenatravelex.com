@@ -2,7 +2,7 @@
   "name": "tena-travel-expeditions",
   "private": true,
   "version": "1.0.0",
-  "description": "Portal oficial de expediciones en Tena, Napo Ecuador. Paquetes turísticos multidía todo incluido, ecoturismo, rafting y circuitos todoterreno en cuatrimotos 4x4.",
+  "description": "Portal oficial de expediciones en Tena, Napo Ecuador. Paquetes turísticos multidía todo incluido, ecoturismo, rafting y circuitos todoterreno en cuatrimotos.",
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",

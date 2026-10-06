@@ -45,8 +45,8 @@ export const Footer: React.FC<FooterProps> = ({
 
             <p className="text-xs text-ivory-400 leading-relaxed">
               {currentLang === 'es'
-                ? 'Operadora receptiva de turismo y expediciones 4x4 en Tena, Napo. Paquetes turísticos multidía, ecoturismo y circuitos todoterreno autorizados.'
-                : 'Premier inbound tour operator and 4x4 quad expeditions in Tena, Napo. All-inclusive multi-day packages, eco-tours, and authorized off-road circuits.'}
+                ? 'Operadora receptiva de turismo y expediciones en cuadrón en Tena, Napo. Paquetes turísticos multidía, ecoturismo y circuitos todoterreno autorizados.'
+                : 'Premier inbound tour operator and quad expeditions in Tena, Napo. All-inclusive multi-day packages, eco-tours, and authorized off-road circuits.'}
             </p>
 
             <div className="text-xs text-emerald-400 font-semibold flex items-center space-x-1.5 pt-1">
@@ -148,7 +148,7 @@ export const Footer: React.FC<FooterProps> = ({
                   }}
                   className="hover:text-flame-400 transition text-left cursor-pointer"
                 >
-                  Selva Virgen 4x4 (4h - $70 / $100)
+                  Selva Virgen (4h - $70 / $100)
                 </button>
               </li>
               <li>

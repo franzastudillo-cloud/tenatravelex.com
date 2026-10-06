@@ -226,7 +226,7 @@ export default {
               body.specs?.terrain || 'Selva / Grava',
               body.specs?.power || '500 CC',
               body.specs?.mudLevel || 'Medio',
-              body.specs?.traction || '4x4',
+              body.specs?.traction || 'Total',
               body.specs?.elevation || '+300 M',
               body.specs?.schedule || '09:00 AM',
               JSON.stringify(body.includes || []),
