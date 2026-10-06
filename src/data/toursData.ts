@@ -449,7 +449,7 @@ export const FAQS: FaqItem[] = [
 export const GOOGLE_MAPS_REVIEWS_URL = 'https://maps.app.goo.gl/kSC953MkUjyeuYeS9';
 
 export const BASE_CAMP_INFO = {
-  address: 'Calle Serafín Gutiérrez y Rafaela Segala / Av. Jumandy km 1.5 vía a Misahuallí',
+  address: 'Calle Serafín Gutiérrez y Rafaela Segala',
   city: 'Tena, Napo, Amazonía del Ecuador',
   phone: '+593 96 189 3686',
   email: 'tenatravelex@gmail.com',
