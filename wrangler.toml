@@ -1,6 +1,7 @@
 name = "tenatravelex-com"
 compatibility_date = "2025-01-01"
 main = "src/worker.ts"
+workers_dev = true
 
 # Configuración de recursos estáticos generados por Vite (dist/)
 [assets]
