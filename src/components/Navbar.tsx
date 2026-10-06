@@ -17,8 +17,22 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectView,
   onOpenBooking,
   onOpenAdmin,
-}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handleSelectViewAndScroll = (view: 'multiday' | 'atv') => {
+    onSelectView(view);
+    const targetId = view === 'multiday' ? 'paquetes' : 'tours-diarios';
+    setTimeout(() => {
+      scrollTo(targetId);
+    }, 60);
+  };
 
   return (
     <>
@@ -106,7 +120,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Center: View Switcher (Both Screens easily accessible) */}
           <div className="hidden lg:flex items-center p-1 rounded-xl bg-carbon-900 border border-jungle-800 shrink-0">
             <button
-              onClick={() => onSelectView('multiday')}
+              type="button"
+              onClick={() => handleSelectViewAndScroll('multiday')}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider font-display transition-all cursor-pointer ${
                 activeView === 'multiday'
                   ? 'bg-gradient-to-r from-flame-600 to-flame-500 text-white shadow-md'
@@ -116,7 +131,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               🌿 {currentLang === 'es' ? 'Paquetes Multidía' : 'Multi-Day Packages'}
             </button>
             <button
-              onClick={() => onSelectView('atv')}
+              type="button"
+              onClick={() => handleSelectViewAndScroll('atv')}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider font-display transition-all cursor-pointer ${
                 activeView === 'atv'
                   ? 'bg-gradient-to-r from-flame-600 to-flame-500 text-white shadow-md'
@@ -129,21 +145,41 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Desktop Nav Links */}
           <nav className="hidden xl:flex items-center space-x-6 text-xs font-bold uppercase tracking-wider text-ivory-300 font-display shrink-0">
-            <a className="hover:text-flame-400 transition" href="#como-funciona">
+            <button
+              type="button"
+              onClick={() => scrollTo('como-funciona')}
+              className="hover:text-flame-400 transition cursor-pointer"
+            >
               {currentLang === 'es' ? '¿Cómo Funciona?' : 'How It Works'}
-            </a>
-            <a className="hover:text-flame-400 transition" href="#ventajas">
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTo('ventajas')}
+              className="hover:text-flame-400 transition cursor-pointer"
+            >
               {currentLang === 'es' ? 'Ventajas' : 'Advantages'}
-            </a>
-            <a className="hover:text-flame-400 transition" href="#testimonios">
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTo('testimonios')}
+              className="hover:text-flame-400 transition cursor-pointer"
+            >
               {currentLang === 'es' ? 'Opiniones' : 'Reviews'}
-            </a>
-            <a className="hover:text-flame-400 transition" href="#base-camp">
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTo('base-camp')}
+              className="hover:text-flame-400 transition cursor-pointer"
+            >
               {currentLang === 'es' ? 'Base & Mapa' : 'Base & Map'}
-            </a>
-            <a className="hover:text-flame-400 transition" href="#faq">
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTo('faq')}
+              className="hover:text-flame-400 transition cursor-pointer"
+            >
               {currentLang === 'es' ? 'Preguntas' : 'FAQ'}
-            </a>
+            </button>
           </nav>
 
           {/* Right Action Cluster - Responsive & Non-overflowing */}
@@ -195,11 +231,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="lg:hidden bg-carbon-900/98 border-b border-jungle-800 p-4 space-y-3">
             <div className="grid grid-cols-2 gap-2 pb-3 border-b border-jungle-800">
               <button
+                type="button"
                 onClick={() => {
-                  onSelectView('multiday');
+                  handleSelectViewAndScroll('multiday');
                   setMobileMenuOpen(false);
                 }}
-                className={`py-2 px-3 rounded-lg text-xs font-bold uppercase font-display text-center ${
+                className={`py-2 px-3 rounded-lg text-xs font-bold uppercase font-display text-center cursor-pointer ${
                   activeView === 'multiday'
                     ? 'bg-flame-600 text-white'
                     : 'bg-carbon-800 text-ivory-300'
@@ -208,11 +245,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                 🌿 {currentLang === 'es' ? 'Paquetes Multidía' : 'Multi-Day'}
               </button>
               <button
+                type="button"
                 onClick={() => {
-                  onSelectView('atv');
+                  handleSelectViewAndScroll('atv');
                   setMobileMenuOpen(false);
                 }}
-                className={`py-2 px-3 rounded-lg text-xs font-bold uppercase font-display text-center ${
+                className={`py-2 px-3 rounded-lg text-xs font-bold uppercase font-display text-center cursor-pointer ${
                   activeView === 'atv'
                     ? 'bg-flame-600 text-white'
                     : 'bg-carbon-800 text-ivory-300'
@@ -223,41 +261,56 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
 
             <nav className="flex flex-col space-y-2 text-xs font-bold uppercase text-ivory-300 font-display">
-              <a
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2 rounded hover:bg-carbon-800 hover:text-flame-400"
-                href="#como-funciona"
+              <button
+                type="button"
+                onClick={() => {
+                  scrollTo('como-funciona');
+                  setMobileMenuOpen(false);
+                }}
+                className="p-2 rounded text-left hover:bg-carbon-800 hover:text-flame-400 cursor-pointer"
               >
                 {currentLang === 'es' ? '¿Cómo Funciona?' : 'How It Works'}
-              </a>
-              <a
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2 rounded hover:bg-carbon-800 hover:text-flame-400"
-                href="#ventajas"
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  scrollTo('ventajas');
+                  setMobileMenuOpen(false);
+                }}
+                className="p-2 rounded text-left hover:bg-carbon-800 hover:text-flame-400 cursor-pointer"
               >
                 {currentLang === 'es' ? 'Ventajas & Flota' : 'Advantages & Fleet'}
-              </a>
-              <a
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2 rounded hover:bg-carbon-800 hover:text-flame-400"
-                href="#testimonios"
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  scrollTo('testimonios');
+                  setMobileMenuOpen(false);
+                }}
+                className="p-2 rounded text-left hover:bg-carbon-800 hover:text-flame-400 cursor-pointer"
               >
                 {currentLang === 'es' ? 'Opiniones de Exploradores' : 'Reviews'}
-              </a>
-              <a
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2 rounded hover:bg-carbon-800 hover:text-flame-400"
-                href="#base-camp"
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  scrollTo('base-camp');
+                  setMobileMenuOpen(false);
+                }}
+                className="p-2 rounded text-left hover:bg-carbon-800 hover:text-flame-400 cursor-pointer"
               >
                 {currentLang === 'es' ? 'Base de Operaciones & Ubicación' : 'Base Camp & Location'}
-              </a>
-              <a
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2 rounded hover:bg-carbon-800 hover:text-flame-400"
-                href="#faq"
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  scrollTo('faq');
+                  setMobileMenuOpen(false);
+                }}
+                className="p-2 rounded text-left hover:bg-carbon-800 hover:text-flame-400 cursor-pointer"
               >
                 {currentLang === 'es' ? 'Preguntas Frecuentes' : 'FAQ'}
-              </a>
+              </button>
             </nav>
 
             <div className="pt-2">

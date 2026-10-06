@@ -50,7 +50,7 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ currentLang }) =
   ];
 
   return (
-    <section className="py-24 bg-carbon-900 border-t border-jungle-800" id="ventajas">
+    <section className="py-24 bg-carbon-900 border-t border-jungle-800 scroll-mt-24" id="ventajas">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}

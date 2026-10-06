@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useCatalog } from '../context/CatalogContext';
 import { MultiDayPackage, DailyQuadTour } from '../data/toursData';
 import { X, Calendar, Users, MessageSquare, Check, Sparkles, Copy, CheckCheck, Clock } from 'lucide-react';
@@ -25,6 +25,7 @@ export const BookingQuoterModal: React.FC<BookingQuoterModalProps> = ({
   const [selectedItemKey, setSelectedItemKey] = useState<string>('magica');
   const [isDoubleRider, setIsDoubleRider] = useState<boolean>(initialIsDouble);
   const [date, setDate] = useState<string>('2025-04-15');
+  const dateInputRef = useRef<HTMLInputElement>(null);
   const [timeShift, setTimeShift] = useState<string>('09:00 AM');
   const [paxCount, setPaxCount] = useState<number>(2);
   const [includeGoPro, setIncludeGoPro] = useState<boolean>(true);
@@ -248,16 +249,32 @@ export const BookingQuoterModal: React.FC<BookingQuoterModalProps> = ({
 
           {/* Date & Shift */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="bg-carbon-850 p-3.5 rounded-2xl border border-jungle-800">
-              <label className="block text-[10px] font-bold uppercase text-ivory-400 tracking-wider mb-1 flex items-center space-x-1">
-                <Calendar className="w-3 h-3 text-flame-400" />
+            <div 
+              onClick={() => {
+                try {
+                  dateInputRef.current?.showPicker();
+                } catch {
+                  dateInputRef.current?.focus();
+                }
+              }}
+              className="bg-carbon-850 p-3.5 rounded-2xl border border-jungle-800 hover:border-flame-500/70 transition cursor-pointer group"
+            >
+              <label className="block text-[10px] font-bold uppercase text-ivory-400 tracking-wider mb-1 flex items-center space-x-1 cursor-pointer">
+                <Calendar className="w-3 h-3 text-flame-400 group-hover:scale-110 transition-transform" />
                 <span>{currentLang === 'es' ? 'Fecha de Salida' : 'Departure Date'}</span>
               </label>
               <input
+                ref={dateInputRef}
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="w-full bg-carbon-900 border border-jungle-700 rounded-xl p-2 text-xs sm:text-sm font-semibold text-ivory-100 focus:outline-none focus:border-flame-500 cursor-pointer"
+                onClick={(e) => {
+                  try {
+                    (e.target as HTMLInputElement).showPicker();
+                  } catch {}
+                }}
+                className="w-full bg-carbon-900 border border-jungle-700 rounded-xl p-2 text-xs sm:text-sm font-semibold text-ivory-100 focus:outline-none focus:border-flame-500 cursor-pointer [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-80 hover:[&::-webkit-calendar-picker-indicator]:opacity-100 transition-all"
+                style={{ colorScheme: 'dark' }}
               />
             </div>
 

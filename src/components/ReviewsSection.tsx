@@ -8,7 +8,7 @@ interface ReviewsSectionProps {
 
 export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ currentLang }) => {
   return (
-    <section className="py-24 bg-carbon-950 border-t border-jungle-800" id="testimonios">
+    <section className="py-24 bg-carbon-950 border-t border-jungle-800 scroll-mt-24" id="testimonios">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header with Rating Badge */}

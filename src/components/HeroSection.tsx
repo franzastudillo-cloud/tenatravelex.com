@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ArrowRight, Calendar, Compass, Users, Sparkles, Shield, Clock, Star, Flame } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -17,6 +17,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const [selectedType, setSelectedType] = useState('all');
   const [selectedDate, setSelectedDate] = useState('2025-04-15');
   const [selectedPax, setSelectedPax] = useState('2');
+  const dateInputRef = useRef<HTMLInputElement>(null);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -193,16 +194,32 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
 
             {/* Field 2: Date */}
-            <div className="bg-carbon-850 p-3 rounded-xl border border-jungle-800 focus-within:border-flame-500 transition">
-              <label className="block text-[10px] font-bold uppercase tracking-wider text-ivory-400 mb-1 flex items-center space-x-1">
-                <Calendar className="w-3 h-3 inline text-flame-500" />
+            <div
+              onClick={() => {
+                try {
+                  dateInputRef.current?.showPicker();
+                } catch {
+                  dateInputRef.current?.focus();
+                }
+              }}
+              className="bg-carbon-850 p-3 rounded-xl border border-jungle-800 focus-within:border-flame-500 hover:border-flame-500/70 transition cursor-pointer group"
+            >
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-ivory-400 mb-1 flex items-center space-x-1 cursor-pointer">
+                <Calendar className="w-3 h-3 inline text-flame-500 group-hover:scale-110 transition-transform" />
                 <span>{currentLang === 'es' ? 'Fecha o Mes Estimado' : 'Estimated Date / Month'}</span>
               </label>
               <input
+                ref={dateInputRef}
                 type="date"
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
-                className="w-full bg-transparent border-0 p-0 text-xs sm:text-sm font-semibold text-ivory-100 focus:ring-0 cursor-pointer"
+                onClick={(e) => {
+                  try {
+                    (e.target as HTMLInputElement).showPicker();
+                  } catch {}
+                }}
+                className="w-full bg-transparent border-0 p-0 text-xs sm:text-sm font-semibold text-ivory-100 focus:ring-0 cursor-pointer [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:opacity-80 hover:[&::-webkit-calendar-picker-indicator]:opacity-100 transition-all"
+                style={{ colorScheme: 'dark' }}
               />
             </div>
 

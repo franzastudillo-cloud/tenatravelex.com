@@ -34,7 +34,7 @@ export const MultiDayPackages: React.FC<MultiDayPackagesProps> = ({
   const { packages, isAdmin, deletePackage } = useCatalog();
 
   return (
-    <section className="py-24 bg-carbon-950 relative" id="paquetes">
+    <section className="py-24 bg-carbon-950 relative scroll-mt-24" id="paquetes">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header with Administrator Controls */}

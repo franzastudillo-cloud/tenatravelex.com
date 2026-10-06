@@ -42,7 +42,7 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({ currentLang }) => {
   ];
 
   return (
-    <section className="py-24 bg-carbon-950 border-t border-jungle-800" id="como-funciona">
+    <section className="py-24 bg-carbon-950 border-t border-jungle-800 scroll-mt-24" id="como-funciona">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}

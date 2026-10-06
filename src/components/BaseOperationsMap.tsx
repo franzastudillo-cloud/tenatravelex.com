@@ -8,7 +8,7 @@ interface BaseOperationsMapProps {
 
 export const BaseOperationsMap: React.FC<BaseOperationsMapProps> = ({ currentLang }) => {
   return (
-    <section className="py-24 bg-carbon-900 border-t border-jungle-800" id="base-camp">
+    <section className="py-24 bg-carbon-900 border-t border-jungle-800 scroll-mt-24" id="base-camp">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
