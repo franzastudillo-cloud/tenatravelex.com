@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Barlow Condensed", sans-serif;
+  --font-sans: "Figtree", "Plus Jakarta Sans", system-ui, sans-serif;
+
+  --color-carbon-950: #070807;
+  --color-carbon-900: #0c0f0d;
+  --color-carbon-850: #121614;
+  --color-carbon-800: #181e1a;
+  --color-carbon-700: #242c27;
+
+  --color-flame-400: #ff7754;
+  --color-flame-500: #ff6036;
+  --color-flame-600: #ea4a2a;
+  --color-flame-700: #c5381b;
+
+  --color-jungle-900: #0d1f16;
+  --color-jungle-800: #142e21;
+  --color-jungle-700: #1d4230;
+  --color-jungle-600: #2b5e45;
+
+  --color-ivory-100: #faf8f5;
+  --color-ivory-200: #f2eee6;
+  --color-ivory-300: #ded5c5;
+  --color-ivory-400: #aba08e;
+}
+
+/* Custom scrollbar and subtle animations */
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070807;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1d4230;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff6036;
+}
+
+/* Cinematic Ken Burns Camera & Video Motion */
+@keyframes kenburns {
+  0% {
+    transform: scale(1.05) translate(0%, 0%);
+  }
+  33% {
+    transform: scale(1.14) translate(-1.2%, -0.8%);
+  }
+  66% {
+    transform: scale(1.18) translate(1.2%, -1.4%);
+  }
+  100% {
+    transform: scale(1.05) translate(0%, 0%);
+  }
+}
+
+.animate-kenburns {
+  animation: kenburns 22s ease-in-out infinite alternate;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Drifting atmospheric rainforest particles / mist */
+@keyframes floatParticle {
+  0% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-30px) translateX(18px);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-60px) translateX(-10px);
+    opacity: 0;
+  }
+}
+
+.animate-particle-1 {
+  animation: floatParticle 8s ease-in-out infinite;
+}
+.animate-particle-2 {
+  animation: floatParticle 11s ease-in-out infinite 2s;
+}
+.animate-particle-3 {
+  animation: floatParticle 14s ease-in-out infinite 4s;
+}
+
+/* Sunbeam & Atmospheric Glow Pulse */
+@keyframes sunbeamPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.1) rotate(3deg);
+  }
+}
+
+.animate-sunbeam {
+  animation: sunbeamPulse 7s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Shimmering Fire Gradient */
+@keyframes gradientShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-text {
+  background-size: 200% 200%;
+  animation: gradientShimmer 6s ease infinite;
+}
