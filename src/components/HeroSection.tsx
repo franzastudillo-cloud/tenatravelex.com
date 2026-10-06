@@ -40,17 +40,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     <section className="relative min-h-[88vh] pt-14 pb-20 flex items-center justify-center overflow-hidden" id="inicio">
       {/* Background Media Plate with Animated Video / Ken Burns Motion & Mist */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Layer 1: Animated Drone / Ken Burns Moving Backdrop */}
-        <div className="w-full h-full overflow-hidden animate-kenburns">
-          <img
-            alt="Expedición en cuadrón en Napo Ecuador"
-            className="w-full h-full object-cover scale-110 filter brightness-[0.88] contrast-[1.08] transition-all duration-1000"
-            src={
+        {/* Layer 1: Animated Drone Video Backdrop */}
+        <div className="w-full h-full overflow-hidden">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster={
               isAtv
                 ? 'https://lh3.googleusercontent.com/aida-public/AB6AXuBvfE4TPwsoQM56oSQ2CWbyQT9lDudpTtah3Wt_NXpoys2C-4ockW1-u68-GGgQbuUod832ctuZ37K6EvW-wKzGJb5d6jcpKtZETljg8vJFHAERLc1MdvNNtyxs4x9v-rfcc-dbKt5hKBuk5hSkNb3OY8bfs387KX8kZT6nD6r6P1LGMf_DuCNyqoxRREOYVLXEw7aNA3yMJjyi77h1e12tmlWykwsuOB6ROTlpofgzvEl-ulmv1fh4'
                 : 'https://lh3.googleusercontent.com/aida/AEtjO1VaGp9Cy1c-zjWv1A9AVbEW1UQgiDG1TTw6R1-fnL3K_NguYG8UUkSPdVOhUazIPgfuAgRPA9OKB3N0IePVKz9qdOtrhNLlPgesvSPHyd7F-7fwTVifJptel-h3INTA189uHr56qvUgkQV0jEZ0U55RsRQj1z4BfhEGHhX_6pbV-t0aMSwG45cV52zjw3zTF0dlJwYHx4SOkED2F4_8ykSIsHEd69k9iUilEzeu3yNhRw4x6E9rQJ0cKsY'
             }
-          />
+            className="w-full h-full object-cover filter brightness-[0.85] contrast-[1.08] transition-all duration-1000"
+          >
+            <source
+              src="https://upload.wikimedia.org/wikipedia/commons/8/84/Beaverhead-River-Drone-Shot.webm"
+              type="video/webm"
+            />
+          </video>
         </div>
 
         {/* Ambient Moving Rainforest Mist & Floating Particles */}
