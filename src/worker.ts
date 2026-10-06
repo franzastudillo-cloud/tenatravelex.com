@@ -1,6 +1,6 @@
 export interface Env {
   DB?: any;
-  ASSETS?: {
+  STATIC_ASSETS?: {
     fetch: (request: Request) => Promise<Response>;
   };
 }
@@ -144,8 +144,8 @@ export default {
     }
 
     // Servir aplicación SPA y archivos estáticos desde Vite dist/
-    if (env.ASSETS) {
-      return env.ASSETS.fetch(request);
+    if (env.STATIC_ASSETS) {
+      return env.STATIC_ASSETS.fetch(request);
     }
 
     return new Response('Tena Travel Expeditions', {
