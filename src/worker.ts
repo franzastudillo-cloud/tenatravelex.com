@@ -15,9 +15,35 @@ export default {
         if (env.DB) {
           try {
             const { results } = await env.DB.prepare(
-              'SELECT * FROM packages WHERE active = 1 ORDER BY id ASC'
+              'SELECT * FROM paquetes_multidia WHERE is_active = 1 ORDER BY price_from ASC'
             ).all();
-            return new Response(JSON.stringify(results), {
+
+            const parsed = results.map((row: any) => ({
+              id: row.id,
+              title: row.title,
+              titleEn: row.title_en,
+              badge: row.badge,
+              badgeEn: row.badge_en,
+              duration: row.duration,
+              durationEn: row.duration_en,
+              difficulty: row.difficulty,
+              difficultyEn: row.difficulty_en,
+              departure: row.departure,
+              departureEn: row.departure_en,
+              desc: row.description,
+              descEn: row.description_en,
+              priceFrom: Number(row.price_from),
+              discountBadge: row.discount_badge,
+              discountBadgeEn: row.discount_badge_en,
+              categoryBadge: row.category_badge,
+              categoryBadgeEn: row.category_badge_en,
+              image: row.image_url,
+              includes: JSON.parse(row.includes_json || '[]'),
+              includesEn: JSON.parse(row.includes_en_json || '[]'),
+              itinerary: JSON.parse(row.itinerary_json || '[]'),
+            }));
+
+            return new Response(JSON.stringify(parsed), {
               headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
@@ -48,18 +74,37 @@ export default {
         try {
           const body = await request.json() as any;
           if (env.DB) {
-            await env.DB.prepare(
-              'INSERT INTO packages (slug, title, duration, price, badge, description, image, itinerary, includes, active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)'
-            ).bind(
-              body.slug,
+            await env.DB.prepare(`
+              INSERT OR REPLACE INTO paquetes_multidia (
+                id, title, title_en, badge, badge_en, duration, duration_en,
+                difficulty, difficulty_en, departure, departure_en,
+                description, description_en, price_from, discount_badge, discount_badge_en,
+                category_badge, category_badge_en, image_url, includes_json, includes_en_json,
+                itinerary_json, is_active
+              ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
+            `).bind(
+              body.id || `pkg-${Date.now()}`,
               body.title,
+              body.titleEn || body.title,
+              body.badge || 'TODO INCLUIDO',
+              body.badgeEn || 'ALL INCLUSIVE',
               body.duration,
-              body.price,
-              body.badge || '',
-              body.description,
+              body.durationEn || body.duration,
+              body.difficulty || 'Fácil',
+              body.difficultyEn || 'Easy',
+              body.departure || 'Salidas diarias',
+              body.departureEn || 'Daily departures',
+              body.desc,
+              body.descEn || body.desc,
+              body.priceFrom,
+              body.discountBadge || '',
+              body.discountBadgeEn || '',
+              body.categoryBadge || '',
+              body.categoryBadgeEn || '',
               body.image,
-              JSON.stringify(body.itinerary || []),
-              JSON.stringify(body.includes || [])
+              JSON.stringify(body.includes || []),
+              JSON.stringify(body.includesEn || body.includes || []),
+              JSON.stringify(body.itinerary || [])
             ).run();
           }
 
@@ -82,9 +127,43 @@ export default {
         if (env.DB) {
           try {
             const { results } = await env.DB.prepare(
-              'SELECT * FROM tours WHERE active = 1 ORDER BY id ASC'
+              'SELECT * FROM tours_cuadrones WHERE is_active = 1 ORDER BY single_price ASC'
             ).all();
-            return new Response(JSON.stringify(results), {
+
+            const parsed = results.map((row: any) => ({
+              id: row.id,
+              circuitNum: row.circuit_num,
+              category: row.category,
+              categoryLabel: row.category_label,
+              categoryLabelEn: row.category_label_en,
+              badge: row.badge,
+              badgeEn: row.badge_en,
+              title: row.title,
+              titleEn: row.title_en,
+              duration: row.duration,
+              durationEn: row.duration_en,
+              difficulty: row.difficulty,
+              difficultyEn: row.difficulty_en,
+              desc: row.description,
+              descEn: row.description_en,
+              singlePrice: Number(row.single_price),
+              doublePrice: Number(row.double_price),
+              specs: {
+                distance: row.distance,
+                waterCrossings: row.water_crossings,
+                terrain: row.terrain,
+                power: row.power,
+                mudLevel: row.mud_level,
+                traction: row.traction,
+                elevation: row.elevation,
+                schedule: row.schedule,
+              },
+              includes: JSON.parse(row.includes_json || '[]'),
+              includesEn: JSON.parse(row.includes_en_json || '[]'),
+              image: row.image_url,
+            }));
+
+            return new Response(JSON.stringify(parsed), {
               headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
@@ -115,18 +194,44 @@ export default {
         try {
           const body = await request.json() as any;
           if (env.DB) {
-            await env.DB.prepare(
-              'INSERT INTO tours (slug, title, duration, difficulty, price, description, image, highlights, includes, active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)'
-            ).bind(
-              body.slug,
+            await env.DB.prepare(`
+              INSERT OR REPLACE INTO tours_cuadrones (
+                id, circuit_num, category, category_label, category_label_en,
+                badge, badge_en, title, title_en, duration, duration_en,
+                difficulty, difficulty_en, description, description_en,
+                single_price, double_price, distance, water_crossings, terrain,
+                power, mud_level, traction, elevation, schedule,
+                includes_json, includes_en_json, image_url, is_active
+              ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
+            `).bind(
+              body.id || `tour-${Date.now()}`,
+              body.circuitNum || 'CIRCUITO 0X',
+              body.category || 'popular',
+              body.categoryLabel || 'Tour Cuadrón',
+              body.categoryLabelEn || 'ATV Quad Tour',
+              body.badge || 'TOUR POPULAR',
+              body.badgeEn || 'POPULAR TOUR',
               body.title,
+              body.titleEn || body.title,
               body.duration,
-              body.difficulty,
-              body.price,
-              body.description,
-              body.image,
-              JSON.stringify(body.highlights || []),
-              JSON.stringify(body.includes || [])
+              body.durationEn || body.duration,
+              body.difficulty || 'Intermedio',
+              body.difficultyEn || 'Intermediate',
+              body.desc,
+              body.descEn || body.desc,
+              body.singlePrice,
+              body.doublePrice,
+              body.specs?.distance || '20 KM',
+              body.specs?.waterCrossings || '2 Vados',
+              body.specs?.terrain || 'Selva / Grava',
+              body.specs?.power || '500 CC',
+              body.specs?.mudLevel || 'Medio',
+              body.specs?.traction || '4x4',
+              body.specs?.elevation || '+300 M',
+              body.specs?.schedule || '09:00 AM',
+              JSON.stringify(body.includes || []),
+              JSON.stringify(body.includesEn || body.includes || []),
+              body.image
             ).run();
           }
 
