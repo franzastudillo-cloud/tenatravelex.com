@@ -86,7 +86,7 @@ export const DailyQuadTours: React.FC<DailyQuadToursProps> = ({
                   className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-xl bg-flame-600 hover:bg-flame-500 text-white text-xs font-bold font-display uppercase tracking-wider transition cursor-pointer"
                 >
                   <Plus className="w-3.5 h-3.5" />
-                  <span>{currentLang === 'es' ? 'Nuevo Circuito' : 'New Circuit'}</span>
+                  <span>{currentLang === 'es' ? 'Nuevo Circuito 4x4' : 'New 4x4 Circuit'}</span>
                 </button>
                 <button
                   onClick={() => onOpenAdminManager('cloudflare')}
@@ -130,7 +130,7 @@ export const DailyQuadTours: React.FC<DailyQuadToursProps> = ({
                   : 'bg-carbon-800 border border-jungle-700 text-ivory-300 hover:text-white'
               }`}
             >
-              {currentLang === 'es' ? 'Barro Extremo' : 'Extreme Mud'}
+              {currentLang === 'es' ? 'Barro 4x4 Extremo' : 'Extreme 4x4 Mud'}
             </button>
             <button
               onClick={() => setActiveCategory('scenic')}

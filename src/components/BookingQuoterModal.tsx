@@ -378,7 +378,7 @@ export const BookingQuoterModal: React.FC<BookingQuoterModalProps> = ({
         {/* WhatsApp Reservation Action Button */}
         <div className="mt-6">
           <a
-            href={`https://wa.me/593990367565?text=${generatedWhatsAppMessage()}`}
+            href={`https://wa.me/593961893686?text=${generatedWhatsAppMessage()}`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full inline-flex items-center justify-center space-x-2 py-4 px-6 rounded-xl text-white font-black text-sm uppercase tracking-wider bg-gradient-to-r from-emerald-600 via-emerald-500 to-emerald-600 hover:from-emerald-500 hover:to-emerald-400 shadow-xl shadow-emerald-600/30 transition font-display"

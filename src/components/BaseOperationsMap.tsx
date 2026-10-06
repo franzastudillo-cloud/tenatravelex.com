@@ -40,7 +40,7 @@ export const BaseOperationsMap: React.FC<BaseOperationsMapProps> = ({ currentLan
                     {currentLang === 'es' ? 'Dirección Principal' : 'Main Headquarters'}
                   </span>
                   <span className="text-xs text-ivory-400">
-                    Calle Serafín Gutiérrez y Rafaela Segala
+                    {BASE_CAMP_INFO.address}, {BASE_CAMP_INFO.city}
                   </span>
                 </div>
               </div>
@@ -74,7 +74,7 @@ export const BaseOperationsMap: React.FC<BaseOperationsMapProps> = ({ currentLan
 
             <div className="pt-2">
               <a
-                href={`https://wa.me/593990367565?text=${encodeURIComponent(
+                href={`https://wa.me/593961893686?text=${encodeURIComponent(
                   currentLang === 'es'
                     ? 'Hola Tena Travel! Deseo coordinar mi llegada a la base de operaciones en Tena.'
                     : 'Hello Tena Travel! I would like to coordinate arrival at your base camp in Tena.'

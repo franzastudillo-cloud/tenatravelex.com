@@ -170,13 +170,13 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
       image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80',
       includes: [
         'Hospedaje en eco-lodge seleccionado',
-        'Tour en Cuadrones por selva y ríos',
+        'Tour en Cuadrones 4x4 por selva y ríos',
         'Alimentación completa tradicional',
         'Guía nativo certificado bilingüe',
       ],
       includesEn: [
         'Lodging at selected eco-lodge',
-        'Quad tour across jungle and rivers',
+        '4x4 Quad tour across jungle and rivers',
         'Full typical meals included',
         'Wilderness-certified bilingual guide',
       ],
@@ -189,9 +189,9 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
         },
         {
           day: 'Día 2',
-          title: 'Ruta en Cuadrón a Cascada Escondida',
+          title: 'Ruta 4x4 a Cascada Escondida',
           desc: 'Expedición en cuadrón por senderos y baño en pozas de agua esmeralda.',
-          activities: ['Pista de práctica', 'Caravana de cuadrones', 'Cascada natural'],
+          activities: ['Pista de práctica', 'Caravana 4x4', 'Cascada natural'],
         },
       ],
     });
@@ -207,8 +207,8 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
       category: 'popular',
       categoryLabel: 'Ruta Panorámica',
       categoryLabelEn: 'Scenic Route',
-      badge: 'NUEVO CIRCUITO · CUADRÓN',
-      badgeEn: 'NEW CIRCUIT · QUAD',
+      badge: 'NUEVO CIRCUITO · 4X4',
+      badgeEn: 'NEW CIRCUIT · 4X4',
       title: 'Nuevo Circuito en Cuadrón',
       titleEn: 'New ATV Quad Circuit',
       duration: '2.5 Horas',
@@ -225,7 +225,7 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
         terrain: 'GRAVA / TIERRA',
         power: '420 CC',
         mudLevel: 'MODERADO',
-        traction: 'AUTOMÁTICA',
+        traction: '4X4 SELECTIVO',
         elevation: '+450 M',
         schedule: '09:00 AM & 14:00 PM',
       },
@@ -321,7 +321,7 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
             }`}
           >
             <Zap className="w-4 h-4" />
-            <span>Circuitos en Cuadrones ({tours.length})</span>
+            <span>Circuitos Cuadrones 4x4 ({tours.length})</span>
           </button>
 
           <button
@@ -500,6 +500,87 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
                         className="w-full bg-carbon-900 border border-jungle-700 focus:border-flame-500 rounded-xl p-3 text-sm text-ivory-100"
                       />
                     </div>
+
+                    <div className="sm:col-span-2 space-y-3 pt-2 border-t border-jungle-800">
+                      <div className="flex items-center justify-between">
+                        <label className="text-xs font-bold text-flame-400 uppercase tracking-wider font-display">
+                          Itinerario Día por Día ({editingPackage.itinerary.length} Días)
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const dayNum = editingPackage.itinerary.length + 1;
+                            setEditingPackage({
+                              ...editingPackage,
+                              itinerary: [
+                                ...editingPackage.itinerary,
+                                {
+                                  day: `Día ${dayNum}`,
+                                  title: `Actividades Día ${dayNum}`,
+                                  desc: `Descripción del día ${dayNum}...`,
+                                  activities: ['Actividad 1', 'Actividad 2'],
+                                },
+                              ],
+                            });
+                          }}
+                          className="px-2.5 py-1 rounded bg-carbon-800 hover:bg-carbon-700 text-ivory-200 border border-jungle-700 text-[11px] font-bold font-display uppercase tracking-wider cursor-pointer"
+                        >
+                          + Agregar Día
+                        </button>
+                      </div>
+
+                      {editingPackage.itinerary.map((dayItem, dIdx) => (
+                        <div key={dIdx} className="p-3 bg-carbon-850 border border-jungle-800 rounded-xl space-y-2">
+                          <div className="flex items-center justify-between gap-2">
+                            <input
+                              type="text"
+                              value={dayItem.day}
+                              onChange={(e) => {
+                                const newItin = [...editingPackage.itinerary];
+                                newItin[dIdx] = { ...newItin[dIdx], day: e.target.value };
+                                setEditingPackage({ ...editingPackage, itinerary: newItin });
+                              }}
+                              className="w-24 bg-carbon-900 border border-jungle-700 rounded-lg px-2 py-1 text-xs text-emerald-400 font-bold"
+                            />
+                            <input
+                              type="text"
+                              value={dayItem.title}
+                              placeholder="Título del día..."
+                              onChange={(e) => {
+                                const newItin = [...editingPackage.itinerary];
+                                newItin[dIdx] = { ...newItin[dIdx], title: e.target.value };
+                                setEditingPackage({ ...editingPackage, itinerary: newItin });
+                              }}
+                              className="flex-1 bg-carbon-900 border border-jungle-700 rounded-lg px-2 py-1 text-xs text-ivory-100 font-bold"
+                            />
+                            {editingPackage.itinerary.length > 1 && (
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const newItin = editingPackage.itinerary.filter((_, idx) => idx !== dIdx);
+                                  setEditingPackage({ ...editingPackage, itinerary: newItin });
+                                }}
+                                className="p-1 rounded text-red-400 hover:bg-red-950/60 cursor-pointer"
+                                title="Eliminar día"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                              </button>
+                            )}
+                          </div>
+                          <textarea
+                            rows={2}
+                            value={dayItem.desc}
+                            placeholder="Descripción de la jornada..."
+                            onChange={(e) => {
+                              const newItin = [...editingPackage.itinerary];
+                              newItin[dIdx] = { ...newItin[dIdx], desc: e.target.value };
+                              setEditingPackage({ ...editingPackage, itinerary: newItin });
+                            }}
+                            className="w-full bg-carbon-900 border border-jungle-700 rounded-lg p-2 text-xs text-ivory-300"
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   <div className="pt-4 border-t border-jungle-800 flex items-center justify-end space-x-3">
@@ -600,7 +681,7 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
             </div>
           )}
 
-          {/* TAB 2: CIRCUITOS CUADRONES */}
+          {/* TAB 2: CIRCUITOS CUADRONES 4X4 */}
           {activeTab === 'atv' && (
             <div>
               {editingTour ? (
@@ -659,7 +740,7 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
                         className="w-full bg-carbon-900 border border-jungle-700 focus:border-flame-500 rounded-xl px-3 py-2 text-sm text-ivory-100"
                       >
                         <option value="popular">Cascadas & Baño Natural</option>
-                        <option value="extrema">Barro Extremo</option>
+                        <option value="extrema">Barro 4x4 Extremo</option>
                         <option value="scenic">Miradores & Ocaso</option>
                       </select>
                     </div>
@@ -785,6 +866,23 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
                         value={editingTour.desc}
                         onChange={(e) => setEditingTour({ ...editingTour, desc: e.target.value })}
                         required
+                        className="w-full bg-carbon-900 border border-jungle-700 focus:border-flame-500 rounded-xl p-3 text-sm text-ivory-100"
+                      />
+                    </div>
+
+                    <div className="sm:col-span-2 lg:col-span-3">
+                      <label className="block text-xs font-bold text-ivory-300 uppercase mb-1">
+                        Inclusiones del Circuito (Separadas por saltos de línea)
+                      </label>
+                      <textarea
+                        rows={3}
+                        value={editingTour.includes.join('\n')}
+                        onChange={(e) =>
+                          setEditingTour({
+                            ...editingTour,
+                            includes: e.target.value.split('\n').filter((s) => s.trim().length > 0),
+                          })
+                        }
                         className="w-full bg-carbon-900 border border-jungle-700 focus:border-flame-500 rounded-xl p-3 text-sm text-ivory-100"
                       />
                     </div>

@@ -272,7 +272,7 @@ export const MultiDayPackages: React.FC<MultiDayPackagesProps> = ({
           </div>
           <a
             className="shrink-0 px-6 py-3.5 rounded-xl bg-flame-600 hover:bg-flame-500 text-white font-bold text-xs uppercase tracking-wider transition font-display flex items-center space-x-2"
-            href="https://wa.me/593990367565?text=Hola%20Tena%20Travel!%20Quiero%20cotizar%20un%20paquete%20personalizado%20a%20la%20medida."
+            href="https://wa.me/593961893686?text=Hola%20Tena%20Travel!%20Quiero%20cotizar%20un%20paquete%20personalizado%20a%20la%20medida."
             target="_blank"
             rel="noopener noreferrer"
           >

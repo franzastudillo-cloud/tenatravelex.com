@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageSquare, Globe, Menu, X, Sparkles, MapPin, Phone } from 'lucide-react';
+import { MessageSquare, Globe, Menu, X, Sparkles, MapPin, Phone, Lock } from 'lucide-react';
 
 interface NavbarProps {
   currentLang: 'es' | 'en';
@@ -7,6 +7,7 @@ interface NavbarProps {
   activeView: 'multiday' | 'atv';
   onSelectView: (view: 'multiday' | 'atv') => void;
   onOpenBooking: () => void;
+  onOpenAdmin?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -15,6 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   activeView,
   onSelectView,
   onOpenBooking,
+  onOpenAdmin,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -53,14 +55,24 @@ export const Navbar: React.FC<NavbarProps> = ({
               </span>
             </a>
             <a
-              href="https://wa.me/593990367565?text=Hola%20Tena%20Travel!%20Quiero%20consultar%20disponibilidad"
+              href="https://wa.me/593961893686?text=Hola%20Tena%20Travel!%20Quiero%20consultar%20disponibilidad"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-flame-400 transition hidden sm:inline-flex items-center space-x-1 font-semibold text-ivory-300"
             >
               <Phone className="w-3 h-3 text-emerald-400" />
-              <span>+593 99 036 7565</span>
+              <span>+593 96 189 3686</span>
             </a>
+            {onOpenAdmin && (
+              <button
+                onClick={onOpenAdmin}
+                className="hover:text-flame-400 transition hidden md:inline-flex items-center space-x-1 font-semibold text-ivory-400 hover:text-white cursor-pointer"
+                title="Acceso Administrador de Catálogo & Cloudflare D1"
+              >
+                <Lock className="w-3 h-3 text-flame-400" />
+                <span>Admin</span>
+              </button>
+            )}
           </div>
         </div>
       </aside>
@@ -111,7 +123,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   : 'text-ivory-300 hover:text-white'
               }`}
             >
-              ⚡ {currentLang === 'es' ? 'Tours Cuadrones (1 Día)' : 'ATV Quad Tours (1 Day)'}
+              ⚡ {currentLang === 'es' ? 'Tours Cuatrimotos (1 Día)' : 'ATV Quad Tours (1 Day)'}
             </button>
           </div>
 
@@ -262,6 +274,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </span>
               </button>
             </div>
+
+            {onOpenAdmin && (
+              <div className="pt-1">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenAdmin();
+                  }}
+                  className="w-full py-2.5 rounded-xl border border-jungle-700 bg-carbon-800 text-ivory-300 hover:text-white font-bold text-xs uppercase tracking-wider font-display flex items-center justify-center space-x-2 cursor-pointer"
+                >
+                  <Lock className="w-3.5 h-3.5 text-flame-400" />
+                  <span>{currentLang === 'es' ? 'Acceso Administrador' : 'Admin Login'}</span>
+                </button>
+              </div>
+            )}
           </div>
         )}
       </header>

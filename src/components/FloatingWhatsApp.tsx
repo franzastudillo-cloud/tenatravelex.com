@@ -16,7 +16,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ currentLang 
       <a
         aria-label="Contactar por WhatsApp"
         className="group flex items-center bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-carbon-950 p-3 sm:px-5 sm:py-3.5 rounded-full shadow-2xl shadow-emerald-500/50 hover:scale-105 transition-all font-display"
-        href={`https://wa.me/593990367565?text=${encodeURIComponent(text)}`}
+        href={`https://wa.me/593961893686?text=${encodeURIComponent(text)}`}
         target="_blank"
         rel="noopener noreferrer"
       >

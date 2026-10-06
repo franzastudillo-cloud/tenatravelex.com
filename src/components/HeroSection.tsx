@@ -1,20 +1,5 @@
-import React, { useState, useRef } from 'react';
-import {
-  ArrowRight,
-  Calendar,
-  Compass,
-  Users,
-  Sparkles,
-  Shield,
-  Clock,
-  Star,
-  Flame,
-  Play,
-  Pause,
-  Video,
-  Eye,
-  Maximize2,
-} from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, Calendar, Compass, Users, Sparkles, Shield, Clock, Star, Flame } from 'lucide-react';
 
 interface HeroSectionProps {
   currentLang: 'es' | 'en';
@@ -32,9 +17,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const [selectedType, setSelectedType] = useState('all');
   const [selectedDate, setSelectedDate] = useState('2025-04-15');
   const [selectedPax, setSelectedPax] = useState('2');
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [videoMode, setVideoMode] = useState<'drone' | 'scenic'>('drone');
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,107 +33,64 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     }
   };
 
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
   const isAtv = activeView === 'atv';
 
-  // Authentic Tena Landscape and Confluence Image
-  const TENA_MUSEUM_CONFLUENCE_IMG =
-    'https://upload.wikimedia.org/wikipedia/commons/b/b7/Malec%C3%B3n_y_Puente_Atirantado_de_Tena.JPG';
-
-  // High-clarity aerial drone video stream
-  const DRONE_RIVER_VIDEO =
-    'https://upload.wikimedia.org/wikipedia/commons/8/84/Beaverhead-River-Drone-Shot.webm';
-
   return (
-    <section
-      className="relative min-h-[90vh] pt-14 pb-20 flex items-center justify-center overflow-hidden"
-      id="inicio"
-    >
-      {/* Background Media Plate - Ultra Clear, Vibrant Daylight Video with High Clarity */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* HTML5 Video Layer with Direct Drone Stream */}
-        <div className="w-full h-full relative">
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster={TENA_MUSEUM_CONFLUENCE_IMG}
-            className="w-full h-full object-cover scale-105 filter brightness-115 contrast-105 saturate-110 transition-all duration-700"
-          >
-            <source src="/tena_rio_portada.mp4" type="video/mp4" />
-            <source src="tena_rio_portada.mp4" type="video/mp4" />
-            <source src={DRONE_RIVER_VIDEO} type="video/webm" />
-            <img
-              alt="Dron de la Confluencia de Ríos Tena y Pano con Puente Atirantado La Isla"
-              className="w-full h-full object-cover scale-105 filter brightness-115 contrast-105 saturate-110 animate-kenburns"
-              src={TENA_MUSEUM_CONFLUENCE_IMG}
-            />
-          </video>
+    <section className="relative min-h-[88vh] pt-14 pb-20 flex items-center justify-center overflow-hidden" id="inicio">
+      {/* Background Media Plate with Animated Video / Ken Burns Motion & Mist */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Layer 1: Animated Drone / Ken Burns Moving Backdrop */}
+        <div className="w-full h-full overflow-hidden animate-kenburns">
+          <img
+            alt="Expedición en cuadrón en Napo Ecuador"
+            className="w-full h-full object-cover scale-110 filter brightness-[0.88] contrast-[1.08] transition-all duration-1000"
+            src={
+              isAtv
+                ? 'https://lh3.googleusercontent.com/aida-public/AB6AXuBvfE4TPwsoQM56oSQ2CWbyQT9lDudpTtah3Wt_NXpoys2C-4ockW1-u68-GGgQbuUod832ctuZ37K6EvW-wKzGJb5d6jcpKtZETljg8vJFHAERLc1MdvNNtyxs4x9v-rfcc-dbKt5hKBuk5hSkNb3OY8bfs387KX8kZT6nD6r6P1LGMf_DuCNyqoxRREOYVLXEw7aNA3yMJjyi77h1e12tmlWykwsuOB6ROTlpofgzvEl-ulmv1fh4'
+                : 'https://lh3.googleusercontent.com/aida/AEtjO1VaGp9Cy1c-zjWv1A9AVbEW1UQgiDG1TTw6R1-fnL3K_NguYG8UUkSPdVOhUazIPgfuAgRPA9OKB3N0IePVKz9qdOtrhNLlPgesvSPHyd7F-7fwTVifJptel-h3INTA189uHr56qvUgkQV0jEZ0U55RsRQj1z4BfhEGHhX_6pbV-t0aMSwG45cV52zjw3zTF0dlJwYHx4SOkED2F4_8ykSIsHEd69k9iUilEzeu3yNhRw4x6E9rQJ0cKsY'
+            }
+          />
         </div>
 
-        {/* Ultra-Clear Daylighting: Only subtle top & bottom vignettes, leaving 100% clear luminous video in the center */}
-        <div className="absolute top-0 inset-x-0 h-36 bg-gradient-to-b from-carbon-950/80 via-carbon-950/25 to-transparent pointer-events-none z-[1]" />
-        <div className="absolute bottom-0 inset-x-0 h-36 bg-gradient-to-t from-carbon-950 via-carbon-950/30 to-transparent pointer-events-none z-[1]" />
-
-        {/* Ambient Subtle Golden Sunbeam */}
-        <div className="absolute top-10 right-1/4 w-[400px] h-[250px] rounded-full bg-amber-400/10 blur-[100px] pointer-events-none z-[1]" />
-      </div>
-
-      {/* Floating Video Control HUD - Claridad & Vista del Dron */}
-      <div className="absolute top-20 right-4 sm:right-8 z-20 flex items-center space-x-2">
-        <div className="bg-carbon-900/90 backdrop-blur-md border border-jungle-700/80 px-3 py-1.5 rounded-xl shadow-2xl flex items-center space-x-2 text-[11px] text-ivory-200">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-          <span className="font-bold uppercase font-display text-emerald-300">
-            Dron 4K: Confluencia Ríos Tena & Pano
-          </span>
-          <button
-            onClick={togglePlay}
-            className="p-1 rounded-lg bg-carbon-800 hover:bg-carbon-700 text-ivory-300 hover:text-white transition cursor-pointer"
-            title={isPlaying ? 'Pausar video' : 'Reproducir video'}
-          >
-            {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-          </button>
+        {/* Ambient Moving Rainforest Mist & Floating Particles */}
+        <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/5 w-72 h-72 rounded-full bg-emerald-500/10 blur-[90px] animate-particle-1" />
+          <div className="absolute top-1/2 right-1/4 w-80 h-80 rounded-full bg-flame-500/15 blur-[110px] animate-particle-2" />
+          <div className="absolute bottom-1/4 left-1/3 w-64 h-64 rounded-full bg-amber-400/10 blur-[85px] animate-particle-3" />
+          <div className="absolute top-10 right-10 w-[450px] h-[450px] rounded-full bg-flame-600/15 blur-[140px] animate-sunbeam" />
         </div>
+
+        {/* Atmospheric Gradients for High Readability Scrim */}
+        <div className="absolute inset-0 z-[2] bg-gradient-to-t from-carbon-950 via-carbon-950/75 to-carbon-950/40" />
+        <div className="absolute inset-0 z-[2] bg-[radial-gradient(circle_at_center,transparent_20%,#070807_92%)]" />
       </div>
 
-      {/* Target Selected Element: Hero Content Container */}
+      {/* Target Selected Element: Hero Content Container with Live Motion */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         
         {/* Live Status Pill with Radar Motion */}
-        <div className="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full border border-emerald-500/60 bg-carbon-950/85 backdrop-blur-md mb-6 shadow-2xl hover:border-flame-500/60 transition-all duration-300">
+        <div className="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full border border-emerald-500/50 bg-carbon-900/90 backdrop-blur-md mb-6 shadow-2xl hover:border-flame-500/60 transition-all duration-300">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400 shadow-[0_0_8px_#34d399]"></span>
           </span>
-          <span className="text-xs sm:text-sm font-bold tracking-wider text-emerald-300 uppercase font-display drop-shadow">
+          <span className="text-xs sm:text-sm font-bold tracking-wider text-emerald-300 uppercase font-display">
             {isAtv
               ? currentLang === 'es'
-                ? 'SÓLO 3 CUADRONES DISPONIBLES HOY (14:30) · TENA, NAPO'
-                : 'ONLY 3 QUADS REMAINING FOR TODAY’S 14:30 RUN · TENA, NAPO'
+                ? 'SÓLO 3 CUATRIMOTOS DISPONIBLES HOY (14:30) · TENA, NAPO'
+                : 'ONLY 3 ATVS REMAINING FOR TODAY’S 14:30 RUN · TENA, NAPO'
               : currentLang === 'es'
               ? 'Salidas Diarias Confirmadas · Guías Locales Certificados Mintur · Tena, Napo'
               : 'Daily Guaranteed Departures · Certified Local Guides Mintur · Tena, Napo'}
           </span>
-          <span className="hidden sm:inline-flex items-center space-x-1 text-[10px] text-flame-400 font-bold uppercase tracking-wider bg-flame-950/80 px-2 py-0.5 rounded border border-flame-800/60">
+          <span className="hidden sm:inline-flex items-center space-x-1 text-[10px] text-flame-400 font-bold uppercase tracking-wider bg-flame-950/60 px-2 py-0.5 rounded border border-flame-800/40">
             <span className="w-1.5 h-1.5 rounded-full bg-flame-400 animate-pulse"></span>
             <span>{currentLang === 'es' ? 'Cámara En Vivo' : 'Live Camera'}</span>
           </span>
         </div>
 
-        {/* Main Headline with Animated Shimmering Fire Gradient & Crisp Shadow for High Legibility */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-white uppercase leading-[0.96] max-w-5xl font-display drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
+        {/* Main Headline with Animated Shimmering Fire Gradient */}
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-ivory-100 uppercase leading-[0.96] max-w-5xl font-display drop-shadow-2xl">
           {isAtv ? (
             <>
               <span>
@@ -159,8 +98,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   ? 'SIENTE LA AMAZONÍA SOBRE'
                   : 'FEEL THE AMAZON ON'}
               </span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-flame-400 via-flame-500 to-amber-400 animate-gradient-text drop-shadow-[0_4px_24px_rgba(255,96,54,0.45)]">
-                {currentLang === 'es' ? 'CUATRO RUEDAS EN CUADRONES' : 'FOUR WHEELS ON QUADS'}
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-flame-400 via-flame-500 to-amber-500 animate-gradient-text drop-shadow-[0_4px_24px_rgba(255,96,54,0.35)]">
+                {currentLang === 'es' ? 'CUATRO RUEDAS 4X4' : 'FOUR WHEELS 4X4'}
               </span>
             </>
           ) : (
@@ -170,22 +109,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   ? 'EXPEDICIONES Y PAQUETES TURÍSTICOS EN LA'
                   : 'EXPEDITIONS & MULTI-DAY PACKAGES IN'}
               </span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-flame-400 via-flame-500 to-amber-400 animate-gradient-text drop-shadow-[0_4px_24px_rgba(255,96,54,0.45)]">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-flame-400 via-flame-500 to-amber-500 animate-gradient-text drop-shadow-[0_4px_24px_rgba(255,96,54,0.35)]">
                 {currentLang === 'es' ? 'AMAZONÍA DE NAPO' : 'TENA, NAPO ECUADOR'}
               </span>
             </>
           )}
         </h1>
 
-        {/* Subtitle with subtle glass backing for effortless reading on the clear video */}
-        <p className="mt-6 text-base sm:text-xl text-ivory-100 max-w-3xl font-medium leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] bg-black/35 backdrop-blur-sm px-5 py-2.5 rounded-2xl border border-white/10">
+        {/* Subtitle */}
+        <p className="mt-6 text-base sm:text-xl text-ivory-300 max-w-3xl font-normal leading-relaxed drop-shadow">
           {isAtv
             ? currentLang === 'es'
-              ? 'Expediciones todoterreno guiadas hacia cascadas ocultas, lagunas esmeralda y cruces de ríos en Tena, Napo. Máquinas automáticas CAN-AM y Honda con guías certificados y senderos de selva virgen.'
-              : 'Guided off-road quad expeditions through hidden waterfalls, emerald river basins, and primary rainforest trails in Tena, Napo. Automatic CAN-AM & Honda fleet with wilderness-certified local pilots.'
+              ? 'Expediciones todoterreno guiadas hacia cascadas ocultas, lagunas esmeralda y cruces de ríos en Tena, Napo. Máquinas automáticas CAN-AM y Honda 4x4 con guías certificados y senderos de selva virgen.'
+              : 'Guided off-road quad expeditions through hidden waterfalls, emerald river basins, and primary rainforest trails in Tena, Napo. Automatic CAN-AM & Honda 4x4 fleet with wilderness-certified local pilots.'
             : currentLang === 'es'
-            ? 'Descubre paquetes todo incluido de 2, 3 y 4 días (selva profunda, cascadas sagradas, cavernas de Jumandy y cuadrones) y tours diarios de adrenalina pura con guías nativos.'
-            : 'Discover all-inclusive 2, 3, and 4-day packages (deep rainforest, sacred waterfalls, Jumandy caves & quads) and pure adrenaline day tours with local native guides.'}
+            ? 'Descubre paquetes todo incluido de 2, 3 y 4 días (selva profunda, cascadas sagradas, cavernas de Jumandy y cuadrones 4x4) y tours diarios de adrenalina pura con guías nativos.'
+            : 'Discover all-inclusive 2, 3, and 4-day packages (deep rainforest, sacred waterfalls, Jumandy caves & 4x4 quads) and pure adrenaline day tours with local native guides.'}
         </p>
 
         {/* Primary Action Buttons */}
@@ -195,7 +134,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               onSelectView('multiday');
               document.getElementById('paquetes')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-flame-600 to-flame-500 hover:from-flame-500 hover:to-flame-400 text-white font-extrabold text-sm tracking-wider uppercase shadow-xl shadow-flame-600/40 hover:shadow-flame-500/60 hover:scale-[1.02] active:scale-[0.98] transition-all text-center font-display cursor-pointer"
+            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-flame-600 to-flame-500 hover:from-flame-500 hover:to-flame-400 text-white font-extrabold text-sm tracking-wider uppercase shadow-xl shadow-flame-600/35 hover:shadow-flame-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all text-center font-display cursor-pointer"
           >
             🌿 {currentLang === 'es' ? 'Explorar Paquetes Multidía' : 'Explore Multi-Day Packages'}
           </button>
@@ -205,7 +144,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               onSelectView('atv');
               document.getElementById('tours-diarios')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-carbon-900/90 hover:bg-carbon-800 text-ivory-100 border border-jungle-600 hover:border-flame-500 font-bold text-sm tracking-wider uppercase backdrop-blur-md hover:scale-[1.02] active:scale-[0.98] transition-all text-center font-display cursor-pointer shadow-xl"
+            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-carbon-900/90 hover:bg-carbon-800 text-ivory-200 border border-jungle-700 hover:border-flame-500/60 font-bold text-sm tracking-wider uppercase backdrop-blur-md hover:scale-[1.02] active:scale-[0.98] transition-all text-center font-display cursor-pointer"
           >
             🔥 {currentLang === 'es' ? 'Ver Tours en Cuadrón (1 Día)' : 'View ATV Quad Tours (1 Day)'}
           </button>
@@ -222,15 +161,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   : 'Real-Time Expedition Finder & Instant Quoter'}
               </span>
             </div>
-            <a
-              href="https://wa.me/593990367565?text=Hola%20Tena%20Travel!%20Quiero%20consultar%20disponibilidad"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[11px] text-emerald-400 hover:text-emerald-300 font-semibold flex items-center space-x-1"
-            >
-              <span>WhatsApp Business: +593 99 036 7565</span>
-              <span className="text-xs">↗</span>
-            </a>
+            <span className="text-[11px] text-emerald-400 font-semibold hidden sm:inline flex items-center space-x-1">
+              <Sparkles className="w-3 h-3 inline" />
+              <span>Cloudflare D1 Synced</span>
+            </span>
           </div>
 
           <form onSubmit={handleSearch} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">

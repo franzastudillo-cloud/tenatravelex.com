@@ -115,6 +115,7 @@ function MainAppContent() {
         activeView={activeView}
         onSelectView={(view) => setActiveView(view)}
         onOpenBooking={handleOpenGeneralBooking}
+        onOpenAdmin={() => handleOpenAdminSection('multiday')}
       />
 
       {/* Hero Section */}

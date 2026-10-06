@@ -41,8 +41,8 @@ export const Footer: React.FC<FooterProps> = ({
 
             <p className="text-xs text-ivory-400 leading-relaxed">
               {currentLang === 'es'
-                ? 'Operadora receptiva de turismo y expediciones en cuadrones en Tena, Napo. Paquetes turísticos multidía, ecoturismo y circuitos todoterreno autorizados.'
-                : 'Premier inbound tour operator and quad expeditions in Tena, Napo. All-inclusive multi-day packages, eco-tours, and authorized off-road circuits.'}
+                ? 'Operadora receptiva de turismo y expediciones 4x4 en Tena, Napo. Paquetes turísticos multidía, ecoturismo y circuitos todoterreno autorizados.'
+                : 'Premier inbound tour operator and 4x4 quad expeditions in Tena, Napo. All-inclusive multi-day packages, eco-tours, and authorized off-road circuits.'}
             </p>
 
             <div className="text-xs text-emerald-400 font-semibold flex items-center space-x-1.5 pt-1">
@@ -144,7 +144,7 @@ export const Footer: React.FC<FooterProps> = ({
                   }}
                   className="hover:text-flame-400 transition text-left cursor-pointer"
                 >
-                  Selva Virgen Mud (4h - $70 / $100)
+                  Selva Virgen 4x4 (4h - $70 / $100)
                 </button>
               </li>
               <li>
@@ -175,17 +175,19 @@ export const Footer: React.FC<FooterProps> = ({
               {currentLang === 'es' ? 'Ubicación & Contacto' : 'Location & Contact'}
             </h4>
             <p className="text-xs text-ivory-300 leading-relaxed mb-3">
-              Calle Serafín Gutiérrez y Rafaela Segala
+              {BASE_CAMP_INFO.address}
+              <br />
+              {BASE_CAMP_INFO.city}
               <br />
               <strong className="text-ivory-100">Atención:</strong> {BASE_CAMP_INFO.hours}
             </p>
             <a
               className="text-sm font-black text-flame-400 hover:text-flame-300 transition block mb-1 font-display"
-              href="https://wa.me/593990367565"
+              href="https://wa.me/593961893686"
               target="_blank"
               rel="noopener noreferrer"
             >
-              WhatsApp: +593 99 036 7565
+              WhatsApp: +593 96 189 3686
             </a>
             <span className="text-xs text-ivory-400 block mb-3">{BASE_CAMP_INFO.email}</span>
             <a

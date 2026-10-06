@@ -1,6 +1,1 @@
-{
-  "name": "Tena Travel Expeditions",
-  "description": "Portal oficial de expediciones en Tena, Napo Ecuador. Paquetes turísticos multidía todo incluido, ecoturismo, rafting y circuitos todoterreno en cuadrones.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
+{"name":"Tena Travel Expeditions","description":"Portal oficial de expediciones en Tena, Napo Ecuador. Paquetes turísticos multidía todo incluido, ecoturismo, rafting y circuitos todoterreno en cuatrimotos 4x4.","requestFramePermissions":[],"majorCapabilities":["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]}
