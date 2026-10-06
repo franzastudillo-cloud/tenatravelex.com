@@ -44,8 +44,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-1.5" />
               <span>
                 {currentLang === 'es'
-                  ? 'D1 Cloudflare Synced · Temporada 2025'
-                  : 'D1 Cloudflare Synced · 2025 Season'}
+                  ? 'Operador Turístico Autorizado · Temporada 2025'
+                  : 'Certified Tour Operator · 2025 Season'}
               </span>
             </span>
             <span className="hidden md:inline text-carbon-700">|</span>

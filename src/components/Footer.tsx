@@ -1,18 +1,22 @@
 import React from 'react';
-import { ShieldCheck, MapPin, Phone, Mail, ArrowUpRight } from 'lucide-react';
+import { ShieldCheck, MapPin, Phone, Mail, ArrowUpRight, Lock } from 'lucide-react';
 import { BASE_CAMP_INFO } from '../data/toursData';
+import { useCatalog } from '../context/CatalogContext';
 
 interface FooterProps {
   currentLang: 'es' | 'en';
   onSelectView: (view: 'multiday' | 'atv') => void;
   onOpenBooking: () => void;
+  onOpenAdmin?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   currentLang,
   onSelectView,
   onOpenBooking,
+  onOpenAdmin,
 }) => {
+  const { isAdmin } = useCatalog();
   return (
     <footer className="bg-carbon-950 border-t border-jungle-800 text-ivory-400 pt-16 pb-12" id="contacto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -203,14 +207,27 @@ export const Footer: React.FC<FooterProps> = ({
 
         </div>
 
-        {/* Bottom copyright line */}
-        <div className="pt-8 border-t border-jungle-800/80 flex flex-col sm:flex-row items-center justify-between text-[11px] text-ivory-400 gap-3">
+        {/* Bottom copyright line & Discreet Admin Access */}
+        <div className="pt-8 border-t border-jungle-800/80 flex flex-col sm:flex-row items-center justify-between text-[11px] text-ivory-500 gap-3">
           <p>
             © 2025 Tena Travel Expeditions Cía. Ltda. Todos los derechos reservados. Tena, Napo, Ecuador.
           </p>
-          <p className="text-emerald-400 font-medium">
-            Cloudflare D1 Database Connected · High Performance Tour Portal
-          </p>
+          <div className="flex items-center space-x-4 opacity-40 hover:opacity-100 transition-opacity">
+            <span className="inline-flex items-center space-x-1.5 text-emerald-500/80">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Cloudflare D1 En Red</span>
+            </span>
+            {onOpenAdmin && (
+              <button
+                onClick={onOpenAdmin}
+                className="hover:text-ivory-200 transition flex items-center space-x-1 cursor-pointer"
+                title="Acceso Administrador de Catálogo & Cloudflare D1"
+              >
+                <Lock className="w-3 h-3 text-flame-400/80" />
+                <span>{isAdmin ? 'Panel Admin (Activo)' : 'Modo Administrador'}</span>
+              </button>
+            )}
+          </div>
         </div>
 
       </div>

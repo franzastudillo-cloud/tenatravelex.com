@@ -185,11 +185,12 @@ function MainAppContent() {
       {/* FAQ Accordions */}
       <FaqSection currentLang={currentLang} />
 
-      {/* Footer with Google Maps Link */}
+      {/* Footer with Google Maps Link & Subtle Admin Mode */}
       <Footer
         currentLang={currentLang}
         onSelectView={(view) => setActiveView(view)}
         onOpenBooking={handleOpenGeneralBooking}
+        onOpenAdmin={() => handleOpenAdminSection('multiday')}
       />
 
       {/* Floating Action Button */}

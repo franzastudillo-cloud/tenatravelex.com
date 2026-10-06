@@ -58,50 +58,30 @@ export const MultiDayPackages: React.FC<MultiDayPackagesProps> = ({
             </p>
           </div>
 
-          {/* Admin Control Cluster */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2.5">
-            {!isAdmin ? (
-              <button
-                onClick={onOpenAdminLogin}
-                className="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider px-3.5 py-2 rounded-xl bg-carbon-900 hover:bg-carbon-850 border border-jungle-700 hover:border-flame-500 text-ivory-300 hover:text-flame-400 transition font-display shadow-lg cursor-pointer"
-                title="Acceder con contraseña para modificar precios y catálogo"
-              >
-                <Lock className="w-3.5 h-3.5 text-flame-500" />
-                <span>{currentLang === 'es' ? 'Modo Administrador' : 'Admin Panel'}</span>
-              </button>
-            ) : (
-              <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-2xl bg-carbon-900 border border-emerald-500/60 shadow-xl">
-                <span className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-emerald-950/80 border border-emerald-800/80 text-emerald-400 text-xs font-bold font-display uppercase">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Admin Activo</span>
-                </span>
-                <button
-                  onClick={() => onOpenAdminManager('multiday')}
-                  className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-xl bg-flame-600 hover:bg-flame-500 text-white text-xs font-bold font-display uppercase tracking-wider transition cursor-pointer"
-                >
-                  <Plus className="w-3.5 h-3.5" />
-                  <span>{currentLang === 'es' ? 'Nuevo Paquete' : 'New Package'}</span>
-                </button>
-                <button
-                  onClick={() => onOpenAdminManager('cloudflare')}
-                  className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-xl bg-carbon-800 hover:bg-carbon-700 text-ivory-200 border border-jungle-700 text-xs font-bold font-display uppercase tracking-wider transition cursor-pointer"
-                  title="Configurar y ver SQL de Cloudflare D1"
-                >
-                  <Database className="w-3.5 h-3.5 text-flame-400" />
-                  <span>Cloudflare D1</span>
-                </button>
-              </div>
-            )}
-
-            <div className="inline-flex items-center space-x-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-carbon-900 border border-jungle-800 text-ivory-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>
-                {currentLang === 'es'
-                  ? 'Cloudflare D1 En Red'
-                  : 'Live Cloudflare D1 Sync'}
+          {/* Admin Control Bar (Solo visible cuando la sesión está iniciada) */}
+          {isAdmin && (
+            <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-2xl bg-carbon-900 border border-emerald-500/60 shadow-xl">
+              <span className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-emerald-950/80 border border-emerald-800/80 text-emerald-400 text-xs font-bold font-display uppercase">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Admin Activo</span>
               </span>
+              <button
+                onClick={() => onOpenAdminManager('multiday')}
+                className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-xl bg-flame-600 hover:bg-flame-500 text-white text-xs font-bold font-display uppercase tracking-wider transition cursor-pointer"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>{currentLang === 'es' ? 'Nuevo Paquete' : 'New Package'}</span>
+              </button>
+              <button
+                onClick={() => onOpenAdminManager('cloudflare')}
+                className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-xl bg-carbon-800 hover:bg-carbon-700 text-ivory-200 border border-jungle-700 text-xs font-bold font-display uppercase tracking-wider transition cursor-pointer"
+                title="Configurar y ver SQL de Cloudflare D1"
+              >
+                <Database className="w-3.5 h-3.5 text-flame-400" />
+                <span>Cloudflare D1</span>
+              </button>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Packages Grid */}

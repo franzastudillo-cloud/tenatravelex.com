@@ -164,7 +164,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
             <span className="text-[11px] text-emerald-400 font-semibold hidden sm:inline flex items-center space-x-1">
               <Sparkles className="w-3 h-3 inline" />
-              <span>Cloudflare D1 Synced</span>
+              <span>{currentLang === 'es' ? 'Salidas Diarias Confirmadas' : 'Daily Guaranteed Departures'}</span>
             </span>
           </div>
 

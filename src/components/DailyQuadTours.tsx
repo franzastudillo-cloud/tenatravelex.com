@@ -64,18 +64,9 @@ export const DailyQuadTours: React.FC<DailyQuadToursProps> = ({
               : 'Staying in Tena or traveling through Napo? Choose from our daily quad routes with certified safety gear, native guides, and practice induction track.'}
           </p>
 
-          {/* Admin Control Bar for ATV Section */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-            {!isAdmin ? (
-              <button
-                onClick={onOpenAdminLogin}
-                className="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-xl bg-carbon-950 hover:bg-carbon-850 border border-jungle-700 hover:border-flame-500 text-ivory-300 hover:text-flame-400 transition font-display shadow-lg cursor-pointer"
-                title="Acceder con contraseña para modificar tarifas y circuitos"
-              >
-                <Lock className="w-3.5 h-3.5 text-flame-500" />
-                <span>{currentLang === 'es' ? 'Modo Administrador de Cuadrones' : 'Admin ATV Panel'}</span>
-              </button>
-            ) : (
+          {/* Admin Control Bar for ATV Section (Solo visible cuando la sesión está iniciada) */}
+          {isAdmin && (
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <div className="inline-flex flex-wrap items-center gap-2 p-1.5 rounded-2xl bg-carbon-950 border border-emerald-500/60 shadow-xl">
                 <span className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-emerald-950/80 border border-emerald-800/80 text-emerald-400 text-xs font-bold font-display uppercase">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -97,8 +88,8 @@ export const DailyQuadTours: React.FC<DailyQuadToursProps> = ({
                   <span>Cloudflare D1</span>
                 </button>
               </div>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Interactive Category Filter Tabs */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
