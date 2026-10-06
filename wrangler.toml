@@ -1,9 +1,10 @@
-name = "tena-travel-expeditions"
+name = "tenatravelex-com"
 compatibility_date = "2025-01-01"
+main = "src/worker.ts"
 pages_build_output_dir = "dist"
 
-# Configuración de base de datos Cloudflare D1 en red
-[[d1_databases]]
-binding = "DB"
-database_name = "tena-travel-d1-prod"
-database_id = "tena-travel-d1-prod"
+# Configuración de recursos estáticos generados por Vite (dist/)
+[assets]
+directory = "./dist"
+not_found_handling = "single-page-application"
+binding = "ASSETS"
