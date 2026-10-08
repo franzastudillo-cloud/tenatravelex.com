@@ -105,7 +105,7 @@ INSERT OR REPLACE INTO paquetes_multidia (
     185.00,
     '-15% para grupos (4+)',
     '-15% for groups (4+)',
-    'https://lh3.googleusercontent.com/aida/AEtjO1Xi7PswMpkHvM2IXojOzlX49beS1413C_rNmqZoWFZmSctMWnlq2AP3MxTtgQE9cHlgVFfxZsPfqD2-uZ4MO6DHt1UEgLOdyaGnGgaVPUuULgCT8ryvq5lFX_nmX4rI9WkUMPxFGRX9x3XCuhu69IWuyFLbSbDkg5xK_28UG1aeSs5XeePYIj5HNAqgrw8eRcrunLuuWxIAMJ1EqFOJ_SffFpo4G87paTKBPg8oQ1j_r-7xZatMBhQ6yH8',
+    'https://images.unsplash.com/photo-1518457607834-6e8d80c183c5?auto=format&fit=crop&w=1200&q=80',
     '["2 Noches en eco-lodge amazónico privado con piscina","Tour en Cuadrones a Cascada Escondida y cañón","Navegación en canoa a motor por el río Napo","Expedición con linterna a Cavernas de Jumandy","Alimentación típica completa (desayunos, almuerzos, cenas)","Guía nativo bilingüe y equipamiento de seguridad"]',
     '["2 Nights at private rainforest eco-lodge with swimming pool","Quad tour to Hidden Waterfall and canyon gorge","Motorized wooden canoe trip down the Napo River","Spelunking expedition with headlamps in Jumandy Caves","Full typical meals (daily breakfasts, lunches, dinners)","Bilingual native guide and complete certified safety gear"]',
     '[{"day":"Día 1","title":"Recepción en Tena & Cavernas Místicas de Jumandy","desc":"Te recibimos en nuestra base en Tena. Check-in en el eco-lodge privado, descanso y almuerzo amazónico de bienvenida. Por la tarde expedición con linternas frontales en las cavernas subterráneas de Jumandy.","activities":["Recepción y briefing","Almuerzo tradicional","Espeleología guiada","Cena en lodge"]},{"day":"Día 2","title":"Expedición en Cuadrones a Cascada Escondida","desc":"Desayuno tropical. Inducción práctica en pista cerrada. Salida en caravana cruzando senderos de selva y 3 vados de río hasta la Cascada Escondida con baño natural.","activities":["Pista de inducción 15 min","Ruta en ríos y selva","Baño en cascada esmeralda","Regreso para cena"]},{"day":"Día 3","title":"Navegación Río Napo, Comunidad Kichwa & Retorno","desc":"Salida en canoa tradicional por el río Napo. Convivencia con sabios Kichwa, taller de chicha viva y chocolate artesanal de fino aroma antes del retorno.","activities":["Paseo fluvial en canoa","Encuentro cultural Kichwa","Taller de chocolate puro","Almuerzo despedida"]}]',
@@ -135,7 +135,7 @@ INSERT OR REPLACE INTO paquetes_multidia (
     140.00,
     'Incluye Rafting + Quad',
     'Includes Rafting + Quad',
-    'https://lh3.googleusercontent.com/aida/AEtjO1U84MIsR6LOHxnBMyMvb96kVFQBfx_CJucc9z9HHL7AYyGAhmAzGXgCxfoxwQQhFXW3ZtcgxCI0cl7UrxUhVa3Oyl1YQxiJZUkIsA3Hfyds131DjsPtXWq3j6dtZ4qUAAxg-1XFeaKFjRVGatiCIhlG49qJrJMqMnRY3vxid-UW8geZrHRq8YYLRK7WunqZyTdOR2xGii-Itv7lGvoH_-kww5PgC1sS0JLxyAwPVIM74Htuw-c-k53nrw',
+    'https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&w=1200&q=80',
     '["Ruta extrema en cuadrón por barro y selva primaria (4h)","Rafting de 25 km en Río Jatunyacu (Clase III mundial)","Noche en cabaña rústica de selva o safari glamping","Asado amazónico tradicional nocturno con fogata","Casco integral FOX, chaleco salvavidas y fotos GoPro"]',
     '["Extreme quad route through mud and deep jungle trails (4h)","25 km White Water Rafting on Jatunyacu River (Class III)","1 Night at rustic jungle cabin or safari glamping","Traditional Amazonian BBQ dinner with campfire","Full FOX certified helmet, lifejacket and GoPro photos"]',
     '[{"day":"Día 1","title":"Ruta Extrema de Barro en Cuadrón & Fogata","desc":"Briefing técnico. Travesía en lodo espeso, trepadas pedregosas y cruces técnicos en selva alta. En la noche asado amazónico a la leña con fogata.","activities":["Test drive 4WD","4 horas de barro y ríos","Poza secreta de selva","Asado y fogata"]},{"day":"Día 2","title":"Rafting Épico de 25 km en Río Jatunyacu","desc":"25 kilómetros de pura adrenalina navegando olas gigantes de aguas cristalinas, cañón selvático y almuerzo estilo picnic en playa de arena blanca.","activities":["Charla de seguridad","Descenso Clase III (25 km)","Almuerzo campestre","Fotos GoPro de acción"]}]',
@@ -165,7 +165,7 @@ INSERT OR REPLACE INTO paquetes_multidia (
     260.00,
     'Eco-Lodge Premium',
     'Premium Eco-Lodge',
-    'https://lh3.googleusercontent.com/aida/AEtjO1UV0hVUUlJNue0gS7e64DQ3zNMfAHK0ns1q0GBbGn_26WjKXDg8ZnfULC2rO5WYs4YHF5zXQpJ7E35KubrUDyIY3QiWb6zEvFp4oDrK6xYVsYPWShZctIbata5wqqS98_D7RLdf0P6q8aHoetz8B85JjGfqJGamzbc7IgaqfRX_UMLGQVIdwiUfNQmT8KzQs4cJto_dZWLGKomGSqIFMisV6QAj2OyPGSUmcVTZHTlwTwzXzU0G9_31PA',
+    'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1200&q=80',
     '["3 Noches en lodge ecológico ribereño frente al río Napo","Inmersión con comunidad Kichwa y taller de chicha viva","Senderismo interpretativo a ceibos gigantes de 500 años","Cuadrones hacia miradores panorámicos al ocaso","Cata artesanal y elaboración de chocolate de fino aroma"]',
     '["3 Nights at riverside eco-lodge overlooking the Napo River","Kichwa community immersion and artisan chicha workshop","Interpretative trek to giant millennial Kapok trees","ATV ride up to panoramic golden hour sunset viewpoints","Handcrafted fine aroma chocolate roasting and tasting"]',
     '[{"day":"Día 1","title":"Travesía Fluvial hacia el Eco-Lodge Ribereño","desc":"Traslado fluvial en canoa hacia el lodge frente al río Napo. Bebida de bienvenida con guayusa caliente y caminata nocturna para avistamiento de fauna.","activities":["Transfer en canoa","Cabaña con balcón","Cena de autor","Safari nocturno"]},{"day":"Día 2","title":"Santuario de Ceibos Gigantes & Sabiduría Kichwa","desc":"Caminata botánica hasta el Ceibo sagrado milenario de 45m. Convivencia con líderes Kichwa y preparación de alimentos ancestrales.","activities":["Trek botánico","Ceibo sagrado 500 años","Chicha de yuca","Playa del río"]},{"day":"Día 3","title":"Cuadrones a Miradores de la Hora Dorada","desc":"Ascenso en cuadrón hacia mirador elevado para contemplar las curvas del río Napo teñidas por los dorados del atardecer. Retorno con barras LED.","activities":["Ruta escénica","Mirador 360°","Brindis al atardecer","Caravana nocturna"]},{"day":"Día 4","title":"Taller de Cacao de Fino Aroma & Despedida","desc":"Cosecha de mazorcas de cacao, tostado a la leña y elaboración artesanal de bombones puros antes del traslado de retorno a Tena.","activities":["Chakra de cacao","Cata de chocolate puro","Almuerzo despedida","Transfer a Tena"]}]',
@@ -204,7 +204,7 @@ INSERT OR REPLACE INTO tours_cuadrones (
     '09:00 AM & 14:00 PM',
     '["Baño libre en laguna natural de cascada virgen","Caminata corta interpretativa de flora amazónica","Pista de inducción y prueba previa de manejo de 15 min","Casco FOX homologado, gafas y bolsa seca para celular","Guía nativo certificado bilingüe"]',
     '["Free swim in pristine emerald waterfall lagoon","Short interpretative walk through lush Amazon flora","15-min prior test-drive training on closed induction track","FOX certified helmet, goggles & waterproof dry bag","Wilderness-certified bilingual native guide"]',
-    'https://lh3.googleusercontent.com/aida/AEtjO1Xi7PswMpkHvM2IXojOzlX49beS1413C_rNmqZoWFZmSctMWnlq2AP3MxTtgQE9cHlgVFfxZsPfqD2-uZ4MO6DHt1UEgLOdyaGnGgaVPUuULgCT8ryvq5lFX_nmX4rI9WkUMPxFGRX9x3XCuhu69IWuyFLbSbDkg5xK_28UG1aeSs5XeePYIj5HNAqgrw8eRcrunLuuWxIAMJ1EqFOJ_SffFpo4G87paTKBPg8oQ1j_r-7xZatMBhQ6yH8',
+    'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80',
     1
 );
 
@@ -243,7 +243,7 @@ INSERT OR REPLACE INTO tours_cuadrones (
     '09:00 AM & 14:00 PM',
     '["Múltiples vados de ríos y salpicaduras aseguradas","Zonas exclusivas de barro para aceleración extrema","Snack amazónico autóctono a mitad de camino","Botas de caucho impermeables provistas","Lavado con manguera de alta presión y duchas al regreso"]',
     '["Multiple river splashes and muddy drifts guaranteed","Exclusive off-road mud playground for high throttle","Authentic Amazonian fruit snack halfway through","Waterproof rubber boots provided for all riders","High-pressure bike wash and warm showers upon return"]',
-    'https://lh3.googleusercontent.com/aida/AEtjO1U84MIsR6LOHxnBMyMvb96kVFQBfx_CJucc9z9HHL7AYyGAhmAzGXgCxfoxwQQhFXW3ZtcgxCI0cl7UrxUhVa3Oyl1YQxiJZUkIsA3Hfyds131DjsPtXWq3j6dtZ4qUAAxg-1XFeaKFjRVGatiCIhlG49qJrJMqMnRY3vxid-UW8geZrHRq8YYLRK7WunqZyTdOR2xGii-Itv7lGvoH_-kww5PgC1sS0JLxyAwPVIM74Htuw-c-k53nrw',
+    'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1200&q=80',
     1
 );
 
@@ -279,6 +279,6 @@ INSERT OR REPLACE INTO tours_cuadrones (
     '14:30 PM (Turno Atardecer)',
     '["Fotografías panorámicas inigualables en hora dorada","Cata de café arábica y chocolate fino de aroma local","Retorno con faros LED de alta potencia al crepúsculo","Casco, gafas y asistencia mecánica permanente"]',
     '["Unmatched panoramic photography stops during golden hour","Artisan high-altitude coffee & dark chocolate tasting","Dusk return with ultra high-power LED lightbars","Helmet, goggles, and permanent mechanical sweep"]',
-    'https://lh3.googleusercontent.com/aida/AEtjO1UV0hVUUlJNue0gS7e64DQ3zNMfAHK0ns1q0GBbGn_26WjKXDg8ZnfULC2rO5WYs4YHF5zXQpJ7E35KubrUDyIY3QiWb6zEvFp4oDrK6xYVsYPWShZctIbata5wqqS98_D7RLdf0P6q8aHoetz8B85JjGfqJGamzbc7IgaqfRX_UMLGQVIdwiUfNQmT8KzQs4cJto_dZWLGKomGSqIFMisV6QAj2OyPGSUmcVTZHTlwTwzXzU0G9_31PA',
+    'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=80',
     1
 );

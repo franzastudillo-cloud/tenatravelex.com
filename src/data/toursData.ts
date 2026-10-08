@@ -101,7 +101,7 @@ export const MULTI_DAY_PACKAGES: MultiDayPackage[] = [
     priceFrom: 185,
     discountBadge: '-15% para grupos (4+)',
     discountBadgeEn: '-15% for groups (4+)',
-    image: 'https://lh3.googleusercontent.com/aida/AEtjO1Xi7PswMpkHvM2IXojOzlX49beS1413C_rNmqZoWFZmSctMWnlq2AP3MxTtgQE9cHlgVFfxZsPfqD2-uZ4MO6DHt1UEgLOdyaGnGgaVPUuULgCT8ryvq5lFX_nmX4rI9WkUMPxFGRX9x3XCuhu69IWuyFLbSbDkg5xK_28UG1aeSs5XeePYIj5HNAqgrw8eRcrunLuuWxIAMJ1EqFOJ_SffFpo4G87paTKBPg8oQ1j_r-7xZatMBhQ6yH8',
+    image: 'https://images.unsplash.com/photo-1518457607834-6e8d80c183c5?auto=format&fit=crop&w=1200&q=80',
     includes: [
       '2 Noches en eco-lodge amazónico privado con piscina y hamacas',
       'Tour en Cuadrones a Cascada Escondida y cañón de agua turquesa',
@@ -156,7 +156,7 @@ export const MULTI_DAY_PACKAGES: MultiDayPackage[] = [
     priceFrom: 140,
     categoryBadge: 'Incluye Rafting + Quad',
     categoryBadgeEn: 'Includes Rafting + Quad',
-    image: 'https://lh3.googleusercontent.com/aida/AEtjO1U84MIsR6LOHxnBMyMvb96kVFQBfx_CJucc9z9HHL7AYyGAhmAzGXgCxfoxwQQhFXW3ZtcgxCI0cl7UrxUhVa3Oyl1YQxiJZUkIsA3Hfyds131DjsPtXWq3j6dtZ4qUAAxg-1XFeaKFjRVGatiCIhlG49qJrJMqMnRY3vxid-UW8geZrHRq8YYLRK7WunqZyTdOR2xGii-Itv7lGvoH_-kww5PgC1sS0JLxyAwPVIM74Htuw-c-k53nrw',
+    image: 'https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&w=1200&q=80',
     includes: [
       'Ruta extrema en cuadrón por barro arcilloso y selva alta (4 horas)',
       'Rafting de 25 km en Río Jatunyacu (Rápidos Clase III mundial)',
@@ -203,7 +203,7 @@ export const MULTI_DAY_PACKAGES: MultiDayPackage[] = [
     priceFrom: 260,
     categoryBadge: 'Eco-Lodge Premium',
     categoryBadgeEn: 'Premium Eco-Lodge',
-    image: 'https://lh3.googleusercontent.com/aida/AEtjO1UV0hVUUlJNue0gS7e64DQ3zNMfAHK0ns1q0GBbGn_26WjKXDg8ZnfULC2rO5WYs4YHF5zXQpJ7E35KubrUDyIY3QiWb6zEvFp4oDrK6xYVsYPWShZctIbata5wqqS98_D7RLdf0P6q8aHoetz8B85JjGfqJGamzbc7IgaqfRX_UMLGQVIdwiUfNQmT8KzQs4cJto_dZWLGKomGSqIFMisV6QAj2OyPGSUmcVTZHTlwTwzXzU0G9_31PA',
+    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1200&q=80',
     includes: [
       '3 Noches en lodge ecológico ribereño frente al río Napo',
       'Inmersión con comunidad Kichwa y taller de chicha viva',
@@ -286,7 +286,7 @@ export const DAILY_QUAD_TOURS: DailyQuadTour[] = [
       'FOX certified helmet, goggles & waterproof dry bag',
       'Wilderness-certified bilingual native guide'
     ],
-    image: 'https://lh3.googleusercontent.com/aida/AEtjO1Xi7PswMpkHvM2IXojOzlX49beS1413C_rNmqZoWFZmSctMWnlq2AP3MxTtgQE9cHlgVFfxZsPfqD2-uZ4MO6DHt1UEgLOdyaGnGgaVPUuULgCT8ryvq5lFX_nmX4rI9WkUMPxFGRX9x3XCuhu69IWuyFLbSbDkg5xK_28UG1aeSs5XeePYIj5HNAqgrw8eRcrunLuuWxIAMJ1EqFOJ_SffFpo4G87paTKBPg8oQ1j_r-7xZatMBhQ6yH8'
+    image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80'
   },
   {
     id: 'selva-virgen-mud',
@@ -329,7 +329,7 @@ export const DAILY_QUAD_TOURS: DailyQuadTour[] = [
       'Waterproof rubber boots provided for all riders',
       'High-pressure bike wash and warm showers upon return'
     ],
-    image: 'https://lh3.googleusercontent.com/aida/AEtjO1U84MIsR6LOHxnBMyMvb96kVFQBfx_CJucc9z9HHL7AYyGAhmAzGXgCxfoxwQQhFXW3ZtcgxCI0cl7UrxUhVa3Oyl1YQxiJZUkIsA3Hfyds131DjsPtXWq3j6dtZ4qUAAxg-1XFeaKFjRVGatiCIhlG49qJrJMqMnRY3vxid-UW8geZrHRq8YYLRK7WunqZyTdOR2xGii-Itv7lGvoH_-kww5PgC1sS0JLxyAwPVIM74Htuw-c-k53nrw'
+    image: 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1200&q=80'
   },
   {
     id: 'mirador-ocaso',
@@ -368,7 +368,7 @@ export const DAILY_QUAD_TOURS: DailyQuadTour[] = [
       'Dusk return with ultra high-power LED lightbars',
       'Helmet, goggles, and permanent mechanical sweep'
     ],
-    image: 'https://lh3.googleusercontent.com/aida/AEtjO1UV0hVUUlJNue0gS7e64DQ3zNMfAHK0ns1q0GBbGn_26WjKXDg8ZnfULC2rO5WYs4YHF5zXQpJ7E35KubrUDyIY3QiWb6zEvFp4oDrK6xYVsYPWShZctIbata5wqqS98_D7RLdf0P6q8aHoetz8B85JjGfqJGamzbc7IgaqfRX_UMLGQVIdwiUfNQmT8KzQs4cJto_dZWLGKomGSqIFMisV6QAj2OyPGSUmcVTZHTlwTwzXzU0G9_31PA'
+    image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=80'
   }
 ];
 

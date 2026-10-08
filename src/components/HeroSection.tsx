@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ArrowRight, Calendar, Compass, Users, Sparkles, Shield, Clock, Star, Flame } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -18,6 +18,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const [selectedDate, setSelectedDate] = useState('2025-04-15');
   const [selectedPax, setSelectedPax] = useState('2');
   const dateInputRef = useRef<HTMLInputElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch((err) => {
+        console.warn('Video autoplay:', err);
+      });
+    }
+  }, []);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,22 +49,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
   return (
     <section className="relative min-h-[88vh] pt-14 pb-20 flex items-center justify-center overflow-hidden" id="inicio">
-      {/* Background Media Plate with Animated Video / Ken Burns Motion & Mist */}
+      {/* Background Media Plate with Animated Video */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Layer 1: Animated Drone Video Backdrop */}
+        {/* Layer 1: Animated Drone Video Backdrop - Bright and Crisp */}
         <div className="w-full h-full overflow-hidden">
           <video
+            ref={videoRef}
             autoPlay
             loop
             muted
             playsInline
-            poster={
-              isAtv
-                ? 'https://lh3.googleusercontent.com/aida-public/AB6AXuBvfE4TPwsoQM56oSQ2CWbyQT9lDudpTtah3Wt_NXpoys2C-4ockW1-u68-GGgQbuUod832ctuZ37K6EvW-wKzGJb5d6jcpKtZETljg8vJFHAERLc1MdvNNtyxs4x9v-rfcc-dbKt5hKBuk5hSkNb3OY8bfs387KX8kZT6nD6r6P1LGMf_DuCNyqoxRREOYVLXEw7aNA3yMJjyi77h1e12tmlWykwsuOB6ROTlpofgzvEl-ulmv1fh4'
-                : 'https://lh3.googleusercontent.com/aida/AEtjO1VaGp9Cy1c-zjWv1A9AVbEW1UQgiDG1TTw6R1-fnL3K_NguYG8UUkSPdVOhUazIPgfuAgRPA9OKB3N0IePVKz9qdOtrhNLlPgesvSPHyd7F-7fwTVifJptel-h3INTA189uHr56qvUgkQV0jEZ0U55RsRQj1z4BfhEGHhX_6pbV-t0aMSwG45cV52zjw3zTF0dlJwYHx4SOkED2F4_8ykSIsHEd69k9iUilEzeu3yNhRw4x6E9rQJ0cKsY'
-            }
-            className="w-full h-full object-cover filter brightness-[0.85] contrast-[1.08] transition-all duration-1000"
+            poster="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1920&q=80"
+            className="w-full h-full object-cover brightness-105 contrast-105 saturate-110 transition-all duration-700"
           >
+            <source
+              src="/videos/hero.webm"
+              type="video/webm"
+            />
             <source
               src="https://upload.wikimedia.org/wikipedia/commons/8/84/Beaverhead-River-Drone-Shot.webm"
               type="video/webm"
@@ -61,17 +73,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </video>
         </div>
 
-        {/* Ambient Moving Rainforest Mist & Floating Particles */}
-        <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+        {/* Ambient Moving Rainforest Mist & Floating Particles (Subtle) */}
+        <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none opacity-30">
           <div className="absolute top-1/4 left-1/5 w-72 h-72 rounded-full bg-emerald-500/10 blur-[90px] animate-particle-1" />
           <div className="absolute top-1/2 right-1/4 w-80 h-80 rounded-full bg-flame-500/15 blur-[110px] animate-particle-2" />
           <div className="absolute bottom-1/4 left-1/3 w-64 h-64 rounded-full bg-amber-400/10 blur-[85px] animate-particle-3" />
-          <div className="absolute top-10 right-10 w-[450px] h-[450px] rounded-full bg-flame-600/15 blur-[140px] animate-sunbeam" />
         </div>
 
-        {/* Atmospheric Gradients for High Readability Scrim */}
-        <div className="absolute inset-0 z-[2] bg-gradient-to-t from-carbon-950 via-carbon-950/75 to-carbon-950/40" />
-        <div className="absolute inset-0 z-[2] bg-[radial-gradient(circle_at_center,transparent_20%,#070807_92%)]" />
+        {/* Soft lighting scrim so the river & rainforest are 100% visible, bright & clear */}
+        <div className="absolute inset-0 z-[2] bg-gradient-to-t from-[#070807] via-black/20 to-[#070807]/50 pointer-events-none" />
       </div>
 
       {/* Target Selected Element: Hero Content Container with Live Motion */}
@@ -99,7 +109,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
 
         {/* Main Headline with Animated Shimmering Fire Gradient */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-ivory-100 uppercase leading-[0.96] max-w-5xl font-display drop-shadow-2xl">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-ivory-100 uppercase leading-[0.96] max-w-5xl font-display drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)]">
           {isAtv ? (
             <>
               <span>
@@ -126,7 +136,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </h1>
 
         {/* Subtitle */}
-        <p className="mt-6 text-base sm:text-xl text-ivory-300 max-w-3xl font-normal leading-relaxed drop-shadow">
+        <p className="mt-6 text-base sm:text-xl text-ivory-200 max-w-3xl font-medium leading-relaxed drop-shadow-[0_2px_14px_rgba(0,0,0,0.95)]">
           {isAtv
             ? currentLang === 'es'
               ? 'Expediciones todoterreno guiadas hacia cascadas ocultas, lagunas esmeralda y cruces de ríos en Tena, Napo. Máquinas automáticas CAN-AM y Honda con guías certificados y senderos de selva virgen.'
