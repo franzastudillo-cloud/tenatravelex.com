@@ -17,6 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectView,
   onOpenBooking,
   onOpenAdmin,
+}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollTo = (id: string) => {
