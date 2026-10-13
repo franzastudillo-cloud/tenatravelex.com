@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCatalog } from '../context/CatalogContext';
-import { MultiDayPackage } from '../data/toursData';
+import { MultiDayPackage, DEFAULT_FALLBACK_IMAGE } from '../data/toursData';
 import {
   Check,
   Clock,
@@ -21,7 +21,7 @@ interface MultiDayPackagesProps {
   onOpenItinerary: (pkg: MultiDayPackage) => void;
   onOpenBooking: (pkg: MultiDayPackage) => void;
   onOpenAdminLogin: () => void;
-  onOpenAdminManager: (tab?: 'multiday' | 'atv' | 'cloudflare', editId?: string) => void;
+  onOpenAdminManager: (tab?: 'multiday' | 'atv' | 'security', editId?: string) => void;
 }
 
 export const MultiDayPackages: React.FC<MultiDayPackagesProps> = ({
@@ -73,12 +73,12 @@ export const MultiDayPackages: React.FC<MultiDayPackagesProps> = ({
                 <span>{currentLang === 'es' ? 'Nuevo Paquete' : 'New Package'}</span>
               </button>
               <button
-                onClick={() => onOpenAdminManager('cloudflare')}
+                onClick={() => onOpenAdminManager('security')}
                 className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-xl bg-carbon-800 hover:bg-carbon-700 text-ivory-200 border border-jungle-700 text-xs font-bold font-display uppercase tracking-wider transition cursor-pointer"
-                title="Configurar y ver SQL de Cloudflare D1"
+                title="Administrar Claves y Seguridad"
               >
-                <Database className="w-3.5 h-3.5 text-flame-400" />
-                <span>Cloudflare D1</span>
+                <Lock className="w-3.5 h-3.5 text-flame-400" />
+                <span>Seguridad</span>
               </button>
             </div>
           )}
@@ -103,7 +103,12 @@ export const MultiDayPackages: React.FC<MultiDayPackagesProps> = ({
                     <img
                       alt={pkg.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                      src={pkg.image}
+                      src={pkg.image || DEFAULT_FALLBACK_IMAGE}
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = DEFAULT_FALLBACK_IMAGE;
+                      }}
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-carbon-900 via-transparent to-black/35" />
                     

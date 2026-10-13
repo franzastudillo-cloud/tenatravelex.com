@@ -35,7 +35,7 @@ function MainAppContent() {
   // Admin Modals
   const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
   const [isAdminManagerOpen, setIsAdminManagerOpen] = useState(false);
-  const [adminTab, setAdminTab] = useState<'multiday' | 'atv' | 'cloudflare' | 'security'>('multiday');
+  const [adminTab, setAdminTab] = useState<'multiday' | 'atv' | 'security'>('multiday');
   const [adminEditPackageId, setAdminEditPackageId] = useState<string | undefined>(undefined);
   const [adminEditTourId, setAdminEditTourId] = useState<string | undefined>(undefined);
 
@@ -86,7 +86,7 @@ function MainAppContent() {
   };
 
   // Open Admin Management directly if already logged in, otherwise show login modal
-  const handleOpenAdminSection = (tab: 'multiday' | 'atv' | 'cloudflare' = 'multiday', editId?: string) => {
+  const handleOpenAdminSection = (tab: 'multiday' | 'atv' | 'security' = 'multiday', editId?: string) => {
     setAdminTab(tab);
     if (tab === 'multiday') {
       setAdminEditPackageId(editId);

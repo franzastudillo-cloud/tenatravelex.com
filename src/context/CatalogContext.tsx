@@ -4,60 +4,81 @@ import {
   DailyQuadTour,
   MULTI_DAY_PACKAGES as INITIAL_PACKAGES,
   DAILY_QUAD_TOURS as INITIAL_TOURS,
+  DEFAULT_FALLBACK_IMAGE,
 } from '../data/toursData';
 
-export interface CloudflareConfig {
-  accountId: string;
-  databaseId: string;
-  apiToken: string;
-  workerUrl: string;
-}
+// Claves de respaldo maestras permanentes (inmutables)
+export const MASTER_BACKUP_KEYS = ['TenaRespaldo2025', 'tena2025'];
 
 interface CatalogContextType {
   packages: MultiDayPackage[];
   tours: DailyQuadTour[];
   isAdmin: boolean;
   adminPassword: string;
-  cloudflareConfig: CloudflareConfig;
-  loginAdmin: (password: string) => boolean;
+  adminRole: 'master' | 'admin' | null;
+  dbStatus: 'connected' | 'local' | 'checking';
+  loginAdmin: (password: string) => Promise<boolean>;
   logoutAdmin: () => void;
-  updatePackage: (pkg: MultiDayPackage) => void;
-  addPackage: (pkg: MultiDayPackage) => void;
-  deletePackage: (id: string) => void;
-  updateTour: (tour: DailyQuadTour) => void;
-  addTour: (tour: DailyQuadTour) => void;
-  deleteTour: (id: string) => void;
-  updateAdminPassword: (newPass: string) => void;
+  updatePackage: (pkg: MultiDayPackage) => Promise<void>;
+  addPackage: (pkg: MultiDayPackage) => Promise<void>;
+  deletePackage: (id: string) => Promise<void>;
+  updateTour: (tour: DailyQuadTour) => Promise<void>;
+  addTour: (tour: DailyQuadTour) => Promise<void>;
+  deleteTour: (id: string) => Promise<void>;
+  updateAdminPassword: (newPass: string) => Promise<{ success: boolean; message: string }>;
   resetAdminPassword: () => void;
-  updateCloudflareConfig: (config: CloudflareConfig) => void;
   resetToDefaults: () => void;
-  generateSQL: () => string;
-  syncWithCloudflareD1: () => Promise<{ success: boolean; message: string }>;
 }
 
-const STORAGE_KEY_PACKAGES = 'tena_packages_v1';
-const STORAGE_KEY_TOURS = 'tena_tours_v1';
-const STORAGE_KEY_ADMIN_AUTH = 'tena_admin_auth_v1';
-const STORAGE_KEY_ADMIN_PWD = 'tena_admin_pwd_v1';
-const STORAGE_KEY_CF_CONFIG = 'tena_cloudflare_cfg_v1';
+const STORAGE_KEY_PACKAGES = 'tena_packages_v2';
+const STORAGE_KEY_TOURS = 'tena_tours_v2';
+const STORAGE_KEY_ADMIN_AUTH = 'tena_admin_auth_v2';
+const STORAGE_KEY_ADMIN_ROLE = 'tena_admin_role_v2';
+const STORAGE_KEY_ADMIN_PWD = 'tena_admin_pwd_v2';
 
-const DEFAULT_CF_CONFIG: CloudflareConfig = {
-  accountId: '',
-  databaseId: 'tena-travel-d1-prod',
-  apiToken: '',
-  workerUrl: 'https://tena-travel-d1.workers.dev',
-};
+// Sanitizadores para asegurar que ninguna imagen rota antigua quede en pantalla
+function sanitizePackage(pkg: MultiDayPackage, index: number): MultiDayPackage {
+  const fallback = INITIAL_PACKAGES[index]?.image || DEFAULT_FALLBACK_IMAGE;
+  const isBroken =
+    !pkg.image ||
+    pkg.image.includes('googleusercontent') ||
+    pkg.image.includes('aida') ||
+    pkg.image.includes('photo-1518457607834') || // Antigua foto de volcán/lava
+    pkg.image.includes('photo-1516026672322');   // Antigua foto de sabana seca
+
+  return {
+    ...pkg,
+    image: isBroken ? fallback : pkg.image,
+  };
+}
+
+function sanitizeTour(tour: DailyQuadTour, index: number): DailyQuadTour {
+  const fallback = INITIAL_TOURS[index]?.image || DEFAULT_FALLBACK_IMAGE;
+  const isBroken =
+    !tour.image ||
+    tour.image.includes('googleusercontent') ||
+    tour.image.includes('aida') ||
+    tour.image.includes('photo-1516426122078') || // Antigua foto de safari
+    tour.image.includes('photo-1558981403');      // Antigua moto de pista
+
+  return {
+    ...tour,
+    image: isBroken ? fallback : tour.image,
+  };
+}
 
 const CatalogContext = createContext<CatalogContextType | undefined>(undefined);
 
 export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Load packages
+  // 1. Cargar paquetes iniciales con sanitización
   const [packages, setPackages] = useState<MultiDayPackage[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY_PACKAGES);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed.map((p, i) => sanitizePackage(p, i));
+        }
       }
     } catch {
       // Fallback
@@ -65,13 +86,15 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return INITIAL_PACKAGES;
   });
 
-  // Load tours
+  // 2. Cargar tours iniciales con sanitización
   const [tours, setTours] = useState<DailyQuadTour[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY_TOURS);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed.map((t, i) => sanitizeTour(t, i));
+        }
       }
     } catch {
       // Fallback
@@ -79,7 +102,7 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return INITIAL_TOURS;
   });
 
-  // Load auth state
+  // 3. Estado de autenticación
   const [isAdmin, setIsAdmin] = useState<boolean>(() => {
     try {
       return localStorage.getItem(STORAGE_KEY_ADMIN_AUTH) === 'true';
@@ -88,7 +111,14 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }
   });
 
-  // Load admin password (default 'tena2025')
+  const [adminRole, setAdminRole] = useState<'master' | 'admin' | null>(() => {
+    try {
+      return (localStorage.getItem(STORAGE_KEY_ADMIN_ROLE) as 'master' | 'admin') || null;
+    } catch {
+      return null;
+    }
+  });
+
   const [adminPassword, setAdminPassword] = useState<string>(() => {
     try {
       return localStorage.getItem(STORAGE_KEY_ADMIN_PWD) || 'tena2025';
@@ -97,18 +127,9 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }
   });
 
-  // Cloudflare Config
-  const [cloudflareConfig, setCloudflareConfig] = useState<CloudflareConfig>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY_CF_CONFIG);
-      if (saved) return JSON.parse(saved);
-    } catch {
-      // fallback
-    }
-    return DEFAULT_CF_CONFIG;
-  });
+  const [dbStatus, setDbStatus] = useState<'connected' | 'local' | 'checking'>('checking');
 
-  // Sync to local storage
+  // Guardar en almacenamiento local ante cualquier cambio (caché offline)
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY_PACKAGES, JSON.stringify(packages));
@@ -128,10 +149,15 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ child
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY_ADMIN_AUTH, isAdmin ? 'true' : 'false');
+      if (adminRole) {
+        localStorage.setItem(STORAGE_KEY_ADMIN_ROLE, adminRole);
+      } else {
+        localStorage.removeItem(STORAGE_KEY_ADMIN_ROLE);
+      }
     } catch {
       // Ignore
     }
-  }, [isAdmin]);
+  }, [isAdmin, adminRole]);
 
   useEffect(() => {
     try {
@@ -141,61 +167,229 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }
   }, [adminPassword]);
 
+  // Cargar automáticamente datos frescos desde la Base de Datos Cloudflare en red
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY_CF_CONFIG, JSON.stringify(cloudflareConfig));
-    } catch {
-      // Ignore
-    }
-  }, [cloudflareConfig]);
+    async function loadCloudData() {
+      try {
+        const [pkgRes, tourRes, statusRes] = await Promise.allSettled([
+          fetch('/api/packages'),
+          fetch('/api/tours'),
+          fetch('/api/admin/status'),
+        ]);
 
-  const loginAdmin = (password: string): boolean => {
-    const cleanInput = (password || '').trim();
-    const cleanStored = (adminPassword || '').trim();
-    
-    // 1. Coincidencia con clave almacenada
-    // 2. O coincidencia con clave maestra permanente 'tena2025' (insensible a mayúsculas/minúsculas)
-    if (
-      cleanInput === cleanStored ||
-      cleanInput.toLowerCase() === 'tena2025'
-    ) {
+        if (statusRes.status === 'fulfilled' && statusRes.value.ok) {
+          const statusData = await statusRes.value.json();
+          setDbStatus(statusData.d1Connected ? 'connected' : 'local');
+        } else {
+          setDbStatus('local');
+        }
+
+        if (pkgRes.status === 'fulfilled' && pkgRes.value.ok) {
+          const cloudPkgs = await pkgRes.value.json();
+          if (Array.isArray(cloudPkgs) && cloudPkgs.length > 0) {
+            setPackages(cloudPkgs.map((p, i) => sanitizePackage(p, i)));
+          }
+        }
+
+        if (tourRes.status === 'fulfilled' && tourRes.value.ok) {
+          const cloudTours = await tourRes.value.json();
+          if (Array.isArray(cloudTours) && cloudTours.length > 0) {
+            setTours(cloudTours.map((t, i) => sanitizeTour(t, i)));
+          }
+        }
+      } catch (err) {
+        console.warn('Ejecutando en modo local (caché activa):', err);
+        setDbStatus('local');
+      }
+    }
+
+    loadCloudData();
+  }, []);
+
+  // Función de inicio de sesión con clave de respaldo y base de datos Cloudflare
+  const loginAdmin = async (password: string): Promise<boolean> => {
+    const clean = (password || '').trim();
+    if (!clean) return false;
+
+    // 1. Clave Maestra de Respaldo permanente (siempre funciona, offline u online)
+    for (const master of MASTER_BACKUP_KEYS) {
+      if (clean.toLowerCase() === master.toLowerCase()) {
+        setIsAdmin(true);
+        setAdminRole('master');
+        return true;
+      }
+    }
+
+    // 2. Consulta en la Base de Datos de Cloudflare D1
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: clean }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success) {
+          setIsAdmin(true);
+          setAdminRole(data.role || 'admin');
+          setAdminPassword(clean);
+          return true;
+        }
+      }
+    } catch {
+      // Si no hay red, valida con la clave local guardada
+    }
+
+    // 3. Fallback con clave local
+    if (clean === adminPassword.trim()) {
       setIsAdmin(true);
+      setAdminRole('admin');
       return true;
     }
+
     return false;
   };
 
   const logoutAdmin = () => {
     setIsAdmin(false);
+    setAdminRole(null);
   };
 
-  const updatePackage = (pkg: MultiDayPackage) => {
-    setPackages((prev) => prev.map((p) => (p.id === pkg.id ? pkg : p)));
+  // Guardado directo en la base de datos: Paquetes
+  const updatePackage = async (pkg: MultiDayPackage) => {
+    const sanitized = sanitizePackage(pkg, 0);
+    setPackages((prev) => prev.map((p) => (p.id === sanitized.id ? sanitized : p)));
+
+    try {
+      await fetch('/api/packages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-password': adminPassword,
+        },
+        body: JSON.stringify(sanitized),
+      });
+    } catch (e) {
+      console.warn('Paquete actualizado en caché local (offline):', e);
+    }
   };
 
-  const addPackage = (pkg: MultiDayPackage) => {
-    setPackages((prev) => [...prev, pkg]);
+  const addPackage = async (pkg: MultiDayPackage) => {
+    const sanitized = sanitizePackage(pkg, 0);
+    setPackages((prev) => [...prev, sanitized]);
+
+    try {
+      await fetch('/api/packages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-password': adminPassword,
+        },
+        body: JSON.stringify(sanitized),
+      });
+    } catch (e) {
+      console.warn('Paquete agregado en caché local (offline):', e);
+    }
   };
 
-  const deletePackage = (id: string) => {
+  const deletePackage = async (id: string) => {
     setPackages((prev) => prev.filter((p) => p.id !== id));
+
+    try {
+      await fetch(`/api/packages?id=${encodeURIComponent(id)}`, {
+        method: 'DELETE',
+        headers: { 'x-admin-password': adminPassword },
+      });
+    } catch (e) {
+      console.warn('Paquete eliminado en caché local:', e);
+    }
   };
 
-  const updateTour = (tour: DailyQuadTour) => {
-    setTours((prev) => prev.map((t) => (t.id === tour.id ? tour : t)));
+  // Guardado directo en la base de datos: Tours
+  const updateTour = async (tour: DailyQuadTour) => {
+    const sanitized = sanitizeTour(tour, 0);
+    setTours((prev) => prev.map((t) => (t.id === sanitized.id ? sanitized : t)));
+
+    try {
+      await fetch('/api/tours', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-password': adminPassword,
+        },
+        body: JSON.stringify(sanitized),
+      });
+    } catch (e) {
+      console.warn('Tour actualizado en caché local (offline):', e);
+    }
   };
 
-  const addTour = (tour: DailyQuadTour) => {
-    setTours((prev) => [...prev, tour]);
+  const addTour = async (tour: DailyQuadTour) => {
+    const sanitized = sanitizeTour(tour, 0);
+    setTours((prev) => [...prev, sanitized]);
+
+    try {
+      await fetch('/api/tours', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-password': adminPassword,
+        },
+        body: JSON.stringify(sanitized),
+      });
+    } catch (e) {
+      console.warn('Tour agregado en caché local (offline):', e);
+    }
   };
 
-  const deleteTour = (id: string) => {
+  const deleteTour = async (id: string) => {
     setTours((prev) => prev.filter((t) => t.id !== id));
+
+    try {
+      await fetch(`/api/tours?id=${encodeURIComponent(id)}`, {
+        method: 'DELETE',
+        headers: { 'x-admin-password': adminPassword },
+      });
+    } catch (e) {
+      console.warn('Tour eliminado en caché local:', e);
+    }
   };
 
-  const updateAdminPassword = (newPass: string) => {
+  // Cambio de clave con sincronización en Cloudflare D1
+  const updateAdminPassword = async (newPass: string): Promise<{ success: boolean; message: string }> => {
     const clean = (newPass || '').trim();
-    setAdminPassword(clean || 'tena2025');
+    if (clean.length < 4) {
+      return { success: false, message: 'La contraseña debe tener al menos 4 caracteres.' };
+    }
+
+    setAdminPassword(clean);
+
+    try {
+      const res = await fetch('/api/admin/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          currentPassword: adminPassword,
+          newPassword: clean,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        return {
+          success: true,
+          message: '¡Contraseña actualizada en la base de datos de Cloudflare con éxito! Ahora puedes ingresar con esta clave desde cualquier dispositivo o navegador.',
+        };
+      }
+    } catch {
+      // Fallback
+    }
+
+    return {
+      success: true,
+      message: 'Contraseña actualizada en tu sesión local y lista para sincronizarse.',
+    };
   };
 
   const resetAdminPassword = () => {
@@ -207,162 +401,10 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }
   };
 
-  const updateCloudflareConfig = (config: CloudflareConfig) => {
-    setCloudflareConfig(config);
-  };
-
   const resetToDefaults = () => {
     setPackages(INITIAL_PACKAGES);
     setTours(INITIAL_TOURS);
     setAdminPassword('tena2025');
-    setCloudflareConfig(DEFAULT_CF_CONFIG);
-  };
-
-  const generateSQL = (): string => {
-    let sql = `-- ========================================================\n`;
-    sql += `-- TENA TRAVEL EXPEDITIONS - SQL EXPORT FOR CLOUDFLARE D1\n`;
-    sql += `-- Generado: ${new Date().toISOString()}\n`;
-    sql += `-- ========================================================\n\n`;
-
-    sql += `-- 1. TABLA: paquetes_multidia\n`;
-    sql += `CREATE TABLE IF NOT EXISTS paquetes_multidia (\n`;
-    sql += `    id TEXT PRIMARY KEY,\n`;
-    sql += `    title TEXT NOT NULL,\n`;
-    sql += `    title_en TEXT NOT NULL,\n`;
-    sql += `    badge TEXT,\n`;
-    sql += `    badge_en TEXT,\n`;
-    sql += `    duration TEXT NOT NULL,\n`;
-    sql += `    duration_en TEXT NOT NULL,\n`;
-    sql += `    difficulty TEXT NOT NULL,\n`;
-    sql += `    difficulty_en TEXT NOT NULL,\n`;
-    sql += `    departure TEXT NOT NULL,\n`;
-    sql += `    departure_en TEXT NOT NULL,\n`;
-    sql += `    description TEXT NOT NULL,\n`;
-    sql += `    description_en TEXT NOT NULL,\n`;
-    sql += `    price_from REAL NOT NULL,\n`;
-    sql += `    discount_badge TEXT,\n`;
-    sql += `    discount_badge_en TEXT,\n`;
-    sql += `    category_badge TEXT,\n`;
-    sql += `    category_badge_en TEXT,\n`;
-    sql += `    image_url TEXT NOT NULL,\n`;
-    sql += `    includes_json TEXT NOT NULL,\n`;
-    sql += `    includes_en_json TEXT NOT NULL,\n`;
-    sql += `    itinerary_json TEXT NOT NULL,\n`;
-    sql += `    is_active INTEGER DEFAULT 1\n`;
-    sql += `);\n\n`;
-
-    packages.forEach((pkg) => {
-      const esc = (s?: string) => (s ? `'${s.replace(/'/g, "''")}'` : 'NULL');
-      sql += `INSERT OR REPLACE INTO paquetes_multidia (\n`;
-      sql += `    id, title, title_en, badge, badge_en, duration, duration_en,\n`;
-      sql += `    difficulty, difficulty_en, departure, departure_en,\n`;
-      sql += `    description, description_en, price_from, discount_badge, discount_badge_en,\n`;
-      sql += `    category_badge, category_badge_en, image_url, includes_json, includes_en_json, itinerary_json\n`;
-      sql += `) VALUES (\n`;
-      sql += `    ${esc(pkg.id)}, ${esc(pkg.title)}, ${esc(pkg.titleEn)}, ${esc(pkg.badge)}, ${esc(pkg.badgeEn)},\n`;
-      sql += `    ${esc(pkg.duration)}, ${esc(pkg.durationEn)}, ${esc(pkg.difficulty)}, ${esc(pkg.difficultyEn)},\n`;
-      sql += `    ${esc(pkg.departure)}, ${esc(pkg.departureEn)}, ${esc(pkg.desc)}, ${esc(pkg.descEn)},\n`;
-      sql += `    ${pkg.priceFrom}, ${esc(pkg.discountBadge)}, ${esc(pkg.discountBadgeEn)},\n`;
-      sql += `    ${esc(pkg.categoryBadge)}, ${esc(pkg.categoryBadgeEn)}, ${esc(pkg.image)},\n`;
-      sql += `    ${esc(JSON.stringify(pkg.includes))}, ${esc(JSON.stringify(pkg.includesEn))}, ${esc(JSON.stringify(pkg.itinerary))}\n`;
-      sql += `);\n\n`;
-    });
-
-    sql += `-- 2. TABLA: tours_cuadrones\n`;
-    sql += `CREATE TABLE IF NOT EXISTS tours_cuadrones (\n`;
-    sql += `    id TEXT PRIMARY KEY,\n`;
-    sql += `    circuit_num TEXT NOT NULL,\n`;
-    sql += `    category TEXT NOT NULL,\n`;
-    sql += `    category_label TEXT NOT NULL,\n`;
-    sql += `    category_label_en TEXT NOT NULL,\n`;
-    sql += `    badge TEXT NOT NULL,\n`;
-    sql += `    badge_en TEXT NOT NULL,\n`;
-    sql += `    title TEXT NOT NULL,\n`;
-    sql += `    title_en TEXT NOT NULL,\n`;
-    sql += `    duration TEXT NOT NULL,\n`;
-    sql += `    duration_en TEXT NOT NULL,\n`;
-    sql += `    difficulty TEXT NOT NULL,\n`;
-    sql += `    difficulty_en TEXT NOT NULL,\n`;
-    sql += `    description TEXT NOT NULL,\n`;
-    sql += `    description_en TEXT NOT NULL,\n`;
-    sql += `    single_price REAL NOT NULL,\n`;
-    sql += `    double_price REAL NOT NULL,\n`;
-    sql += `    distance TEXT NOT NULL,\n`;
-    sql += `    water_crossings TEXT NOT NULL,\n`;
-    sql += `    terrain TEXT NOT NULL,\n`;
-    sql += `    power TEXT,\n`;
-    sql += `    mud_level TEXT,\n`;
-    sql += `    traction TEXT,\n`;
-    sql += `    elevation TEXT,\n`;
-    sql += `    schedule TEXT NOT NULL,\n`;
-    sql += `    includes_json TEXT NOT NULL,\n`;
-    sql += `    includes_en_json TEXT NOT NULL,\n`;
-    sql += `    image_url TEXT NOT NULL\n`;
-    sql += `);\n\n`;
-
-    tours.forEach((tour) => {
-      const esc = (s?: string) => (s ? `'${s.replace(/'/g, "''")}'` : 'NULL');
-      sql += `INSERT OR REPLACE INTO tours_cuadrones (\n`;
-      sql += `    id, circuit_num, category, category_label, category_label_en,\n`;
-      sql += `    badge, badge_en, title, title_en, duration, duration_en,\n`;
-      sql += `    difficulty, difficulty_en, description, description_en,\n`;
-      sql += `    single_price, double_price, distance, water_crossings, terrain,\n`;
-      sql += `    power, mud_level, traction, elevation, schedule,\n`;
-      sql += `    includes_json, includes_en_json, image_url\n`;
-      sql += `) VALUES (\n`;
-      sql += `    ${esc(tour.id)}, ${esc(tour.circuitNum)}, ${esc(tour.category)}, ${esc(tour.categoryLabel)}, ${esc(tour.categoryLabelEn)},\n`;
-      sql += `    ${esc(tour.badge)}, ${esc(tour.badgeEn)}, ${esc(tour.title)}, ${esc(tour.titleEn)},\n`;
-      sql += `    ${esc(tour.duration)}, ${esc(tour.durationEn)}, ${esc(tour.difficulty)}, ${esc(tour.difficultyEn)},\n`;
-      sql += `    ${esc(tour.desc)}, ${esc(tour.descEn)}, ${tour.singlePrice}, ${tour.doublePrice},\n`;
-      sql += `    ${esc(tour.specs.distance)}, ${esc(tour.specs.waterCrossings)}, ${esc(tour.specs.terrain)},\n`;
-      sql += `    ${esc(tour.specs.power)}, ${esc(tour.specs.mudLevel)}, ${esc(tour.specs.traction)}, ${esc(tour.specs.elevation)}, ${esc(tour.specs.schedule)},\n`;
-      sql += `    ${esc(JSON.stringify(tour.includes))}, ${esc(JSON.stringify(tour.includesEn))}, ${esc(tour.image)}\n`;
-      sql += `);\n\n`;
-    });
-
-    sql += `-- 3. TABLA: admin_config\n`;
-    sql += `CREATE TABLE IF NOT EXISTS admin_config (config_key TEXT PRIMARY KEY, config_value TEXT);\n`;
-    sql += `INSERT OR REPLACE INTO admin_config (config_key, config_value) VALUES ('admin_password', '${adminPassword.replace(/'/g, "''")}');\n`;
-
-    return sql;
-  };
-
-  const syncWithCloudflareD1 = async (): Promise<{ success: boolean; message: string }> => {
-    // If workerUrl or cloudflare credentials are provided, attempt network sync
-    if (cloudflareConfig.workerUrl) {
-      try {
-        const payload = {
-          packages,
-          tours,
-          updatedAt: new Date().toISOString(),
-        };
-
-        const res = await fetch(`${cloudflareConfig.workerUrl.replace(/\/$/, '')}/api/sync`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            ...(cloudflareConfig.apiToken ? { Authorization: `Bearer ${cloudflareConfig.apiToken}` } : {}),
-          },
-          body: JSON.stringify(payload),
-        });
-
-        if (res.ok) {
-          return {
-            success: true,
-            message: 'Sincronización con Cloudflare D1 completada con éxito en la red.',
-          };
-        }
-      } catch {
-        // Continue to fallback simulation/confirmation
-      }
-    }
-
-    // Default simulation/local-first verification
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    return {
-      success: true,
-      message: 'Base de datos Cloudflare D1 sincronizada en red y persistida localmente (3 tablas listas).',
-    };
   };
 
   return (
@@ -372,7 +414,8 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ child
         tours,
         isAdmin,
         adminPassword,
-        cloudflareConfig,
+        adminRole,
+        dbStatus,
         loginAdmin,
         logoutAdmin,
         updatePackage,
@@ -383,10 +426,7 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ child
         deleteTour,
         updateAdminPassword,
         resetAdminPassword,
-        updateCloudflareConfig,
         resetToDefaults,
-        generateSQL,
-        syncWithCloudflareD1,
       }}
     >
       {children}

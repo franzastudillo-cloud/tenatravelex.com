@@ -1,3 +1,5 @@
+export const DEFAULT_FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80';
+
 export interface DayItinerary {
   day: string;
   title: string;
@@ -101,7 +103,7 @@ export const MULTI_DAY_PACKAGES: MultiDayPackage[] = [
     priceFrom: 185,
     discountBadge: '-15% para grupos (4+)',
     discountBadgeEn: '-15% for groups (4+)',
-    image: 'https://images.unsplash.com/photo-1518457607834-6e8d80c183c5?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80',
     includes: [
       '2 Noches en eco-lodge amazónico privado con piscina y hamacas',
       'Tour en Cuadrones a Cascada Escondida y cañón de agua turquesa',
@@ -203,7 +205,7 @@ export const MULTI_DAY_PACKAGES: MultiDayPackage[] = [
     priceFrom: 260,
     categoryBadge: 'Eco-Lodge Premium',
     categoryBadgeEn: 'Premium Eco-Lodge',
-    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80',
     includes: [
       '3 Noches en lodge ecológico ribereño frente al río Napo',
       'Inmersión con comunidad Kichwa y taller de chicha viva',
@@ -286,7 +288,7 @@ export const DAILY_QUAD_TOURS: DailyQuadTour[] = [
       'FOX certified helmet, goggles & waterproof dry bag',
       'Wilderness-certified bilingual native guide'
     ],
-    image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80'
+    image: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=80'
   },
   {
     id: 'selva-virgen-mud',
@@ -329,7 +331,7 @@ export const DAILY_QUAD_TOURS: DailyQuadTour[] = [
       'Waterproof rubber boots provided for all riders',
       'High-pressure bike wash and warm showers upon return'
     ],
-    image: 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1200&q=80'
+    image: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80'
   },
   {
     id: 'mirador-ocaso',

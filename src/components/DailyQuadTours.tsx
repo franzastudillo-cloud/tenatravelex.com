@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCatalog } from '../context/CatalogContext';
-import { DailyQuadTour } from '../data/toursData';
+import { DailyQuadTour, DEFAULT_FALLBACK_IMAGE } from '../data/toursData';
 import {
   Check,
   Clock,
@@ -21,7 +21,7 @@ interface DailyQuadToursProps {
   currentLang: 'es' | 'en';
   onBookTour: (tour: DailyQuadTour, isDouble: boolean) => void;
   onOpenAdminLogin: () => void;
-  onOpenAdminManager: (tab?: 'multiday' | 'atv' | 'cloudflare', editId?: string) => void;
+  onOpenAdminManager: (tab?: 'multiday' | 'atv' | 'security', editId?: string) => void;
 }
 
 export const DailyQuadTours: React.FC<DailyQuadToursProps> = ({
@@ -80,12 +80,12 @@ export const DailyQuadTours: React.FC<DailyQuadToursProps> = ({
                   <span>{currentLang === 'es' ? 'Nuevo Circuito' : 'New Circuit'}</span>
                 </button>
                 <button
-                  onClick={() => onOpenAdminManager('cloudflare')}
+                  onClick={() => onOpenAdminManager('security')}
                   className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-xl bg-carbon-800 hover:bg-carbon-700 text-ivory-200 border border-jungle-700 text-xs font-bold font-display uppercase tracking-wider transition cursor-pointer"
-                  title="Configurar y ver SQL de Cloudflare D1"
+                  title="Administrar Claves y Seguridad"
                 >
-                  <Database className="w-3.5 h-3.5 text-flame-400" />
-                  <span>Cloudflare D1</span>
+                  <Lock className="w-3.5 h-3.5 text-flame-400" />
+                  <span>Seguridad</span>
                 </button>
               </div>
             </div>
@@ -155,7 +155,12 @@ export const DailyQuadTours: React.FC<DailyQuadToursProps> = ({
                     <img
                       alt={tour.title}
                       className="w-full h-full object-cover transition duration-500 hover:scale-105"
-                      src={tour.image}
+                      src={tour.image || DEFAULT_FALLBACK_IMAGE}
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = DEFAULT_FALLBACK_IMAGE;
+                      }}
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-carbon-950 via-transparent to-black/30" />
 
