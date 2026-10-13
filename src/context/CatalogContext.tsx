@@ -28,6 +28,7 @@ interface CatalogContextType {
   addTour: (tour: DailyQuadTour) => void;
   deleteTour: (id: string) => void;
   updateAdminPassword: (newPass: string) => void;
+  resetAdminPassword: () => void;
   updateCloudflareConfig: (config: CloudflareConfig) => void;
   resetToDefaults: () => void;
   generateSQL: () => string;
@@ -149,7 +150,15 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ child
   }, [cloudflareConfig]);
 
   const loginAdmin = (password: string): boolean => {
-    if (password === adminPassword) {
+    const cleanInput = (password || '').trim();
+    const cleanStored = (adminPassword || '').trim();
+    
+    // 1. Coincidencia con clave almacenada
+    // 2. O coincidencia con clave maestra permanente 'tena2025' (insensible a mayúsculas/minúsculas)
+    if (
+      cleanInput === cleanStored ||
+      cleanInput.toLowerCase() === 'tena2025'
+    ) {
       setIsAdmin(true);
       return true;
     }
@@ -185,7 +194,17 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const updateAdminPassword = (newPass: string) => {
-    setAdminPassword(newPass);
+    const clean = (newPass || '').trim();
+    setAdminPassword(clean || 'tena2025');
+  };
+
+  const resetAdminPassword = () => {
+    setAdminPassword('tena2025');
+    try {
+      localStorage.setItem(STORAGE_KEY_ADMIN_PWD, 'tena2025');
+    } catch {
+      // Ignore
+    }
   };
 
   const updateCloudflareConfig = (config: CloudflareConfig) => {
@@ -363,6 +382,7 @@ export const CatalogProvider: React.FC<{ children: React.ReactNode }> = ({ child
         addTour,
         deleteTour,
         updateAdminPassword,
+        resetAdminPassword,
         updateCloudflareConfig,
         resetToDefaults,
         generateSQL,

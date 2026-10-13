@@ -63,8 +63,8 @@ export default {
       }
 
       if (request.method === 'POST') {
-        const password = request.headers.get('x-admin-password');
-        if (password !== 'tena2025') {
+        const password = request.headers.get('x-admin-password') || '';
+        if (password.trim().toLowerCase() !== 'tena2025') {
           return new Response(JSON.stringify({ error: 'Contraseña de administrador incorrecta' }), {
             status: 401,
             headers: { 'Content-Type': 'application/json' }
@@ -183,8 +183,8 @@ export default {
       }
 
       if (request.method === 'POST') {
-        const password = request.headers.get('x-admin-password');
-        if (password !== 'tena2025') {
+        const password = request.headers.get('x-admin-password') || '';
+        if (password.trim().toLowerCase() !== 'tena2025') {
           return new Response(JSON.stringify({ error: 'Contraseña de administrador incorrecta' }), {
             status: 401,
             headers: { 'Content-Type': 'application/json' }

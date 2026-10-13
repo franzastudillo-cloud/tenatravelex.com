@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCatalog } from '../context/CatalogContext';
-import { Lock, Eye, EyeOff, X, ShieldAlert, CheckCircle, Database } from 'lucide-react';
+import { Lock, Eye, EyeOff, X, ShieldAlert, CheckCircle, Database, RotateCcw } from 'lucide-react';
 
 interface AdminLoginModalProps {
   isOpen: boolean;
@@ -15,19 +15,21 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
   onSuccess,
   panelTitle = 'Administrador de Catálogo & Cloudflare D1',
 }) => {
-  const { loginAdmin } = useCatalog();
+  const { loginAdmin, resetAdminPassword } = useCatalog();
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [resetNotice, setResetNotice] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (loginAdmin(password)) {
+    if (loginAdmin(password.trim())) {
       setError(false);
       setSuccess(true);
+      setResetNotice(null);
       setTimeout(() => {
         setSuccess(false);
         setPassword('');
@@ -37,6 +39,13 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
     } else {
       setError(true);
     }
+  };
+
+  const handleResetPassword = () => {
+    resetAdminPassword();
+    setPassword('tena2025');
+    setError(false);
+    setResetNotice('¡Clave restablecida a "tena2025" con éxito! Ahora presiona "Ingresar".');
   };
 
   return (
@@ -99,11 +108,19 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
             </div>
           </div>
 
+          {/* Reset Notice */}
+          {resetNotice && (
+            <div className="p-3 rounded-xl bg-cyan-950/70 border border-cyan-800/80 text-cyan-200 text-xs flex items-center space-x-2">
+              <CheckCircle className="w-4 h-4 shrink-0 text-cyan-400" />
+              <span>{resetNotice}</span>
+            </div>
+          )}
+
           {/* Error Message */}
           {error && (
             <div className="p-3 rounded-xl bg-red-950/60 border border-red-800/80 text-red-300 text-xs flex items-center space-x-2">
               <ShieldAlert className="w-4 h-4 shrink-0 text-red-400" />
-              <span>Contraseña incorrecta. Por defecto es <strong className="text-red-200">tena2025</strong></span>
+              <span>Contraseña no válida. Puedes pulsar el botón abajo para restablecerla a <strong className="text-red-200">tena2025</strong>.</span>
             </div>
           )}
 
@@ -115,12 +132,23 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
             </div>
           )}
 
-          {/* Helper hint for default password */}
-          <div className="text-[11px] text-ivory-400 bg-carbon-850 p-2.5 rounded-lg border border-jungle-800 flex items-center justify-between">
-            <span>Clave predeterminada:</span>
-            <code className="text-flame-400 font-bold bg-carbon-900 px-2 py-0.5 rounded border border-jungle-700">
-              tena2025
-            </code>
+          {/* Helper hint & Reset Action */}
+          <div className="text-[11px] text-ivory-400 bg-carbon-850 p-2.5 rounded-xl border border-jungle-800 flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <span>Clave maestra:</span>
+              <code className="text-flame-400 font-bold bg-carbon-900 px-2 py-0.5 rounded border border-jungle-700">
+                tena2025
+              </code>
+            </div>
+            <button
+              type="button"
+              onClick={handleResetPassword}
+              className="text-[11px] text-flame-400 hover:text-flame-300 font-semibold underline flex items-center space-x-1 cursor-pointer transition"
+              title="Restablece la contraseña local a tena2025"
+            >
+              <RotateCcw className="w-3 h-3 inline" />
+              <span>Restablecer</span>
+            </button>
           </div>
 
           {/* Action buttons */}

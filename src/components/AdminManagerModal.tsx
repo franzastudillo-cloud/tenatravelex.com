@@ -47,6 +47,7 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
     addTour,
     deleteTour,
     updateAdminPassword,
+    resetAdminPassword,
     updateCloudflareConfig,
     resetToDefaults,
     generateSQL,
@@ -1197,6 +1198,20 @@ export const AdminManagerModal: React.FC<AdminManagerModalProps> = ({
                   className="w-full py-3 px-4 rounded-xl bg-flame-600 hover:bg-flame-500 text-white font-bold text-xs uppercase tracking-wider font-display transition shadow-lg shadow-flame-600/30 cursor-pointer"
                 >
                   Actualizar Contraseña
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    resetAdminPassword();
+                    setNewPassword('');
+                    setConfirmPassword('');
+                    setPwdMsg({ type: 'success', text: 'Contraseña restablecida con éxito a "tena2025".' });
+                  }}
+                  className="w-full py-2.5 px-4 rounded-xl border border-jungle-700 bg-carbon-800 hover:bg-carbon-700 text-ivory-300 font-medium text-xs transition cursor-pointer flex items-center justify-center space-x-2"
+                >
+                  <RefreshCw className="w-3.5 h-3.5 text-flame-400" />
+                  <span>Restablecer a contraseña por defecto (tena2025)</span>
                 </button>
               </form>
 
